@@ -7,7 +7,7 @@ const polizasApiController = require('../../controllers/apiControllers/polizasAp
 router.get('/', polizasApiController.list);
 
 //Buscar polizas por cliente validado
-router.post('/porClientes', polizasApiController.listForClients)
+router.post('/porClientes', polizasApiController.listForClientsAuto)
 
 
 module.exports = router;

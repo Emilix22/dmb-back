@@ -1,5 +1,6 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = 'Poliza';
+
+    let alias = 'Auto';
 
     let cols = {
         id: {
@@ -7,17 +8,17 @@ module.exports = (sequelize, dataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        numero_poliza: {
+        marca: {
             type: dataTypes.STRING
         },
-        cliente_id: {
-            type: dataTypes.INTEGER
+        modelo: {
+            type: dataTypes.STRING
         },
-        tipo_id: {
-            type: dataTypes.INTEGER
+        patente: {
+            type: dataTypes.STRING
         },
-        auto_id: {
-            type: dataTypes.INTEGER
+        chasis: {
+            type: dataTypes.STRING
         },
         createdAt: {
             type: dataTypes.DATE
@@ -31,25 +32,20 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: 'polizas',
+        tableName: 'autos',
         timestamps: true,
         paranoid: true
     };
 
-    const Poliza = sequelize.define(alias, cols, config)
+    const Auto = sequelize.define(alias, cols, config)
 
-    Poliza.associate = function(models) {
+    Auto.associate = function(models) {
 
-        Poliza.belongsTo(models.Cliente,{
-            foreignKey: 'cliente_id',
-            as: 'clientes'
-        }),
-
-        Poliza.belongsTo(models.Auto,{
+        Auto.hasMany(models.Poliza,{
             foreignKey: 'auto_id',
             as: 'autos'
         })
     }   
 
-    return Poliza;
+    return Auto;
 }

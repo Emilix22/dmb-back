@@ -9,7 +9,9 @@ const Clientes = db.Cliente;
 const controller = {
 
     list: (req, res) => {
-        Polizas.findAll()
+        Polizas.findAll({
+            include: [{association: 'clientes'}, {association: 'autos'}]
+        })
         .then(polizas => {
             let info = {
                 meta: {
@@ -25,10 +27,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForClients: (req, res) => {
+    listForClientsAuto: (req, res) => {
         Polizas.findAll({
-            where: {cliente_id: req.body.id_client},
-            include: [{association: 'clientes'}]
+            where: {cliente_id: req.body.id_client, tipo_id: 1},
+            include: [{association: 'clientes'}, {association: 'autos'}]
         })
         .then(polizas => {
             let info = {
