@@ -3,15 +3,18 @@ module.exports = (sequelize, dataTypes) => {
     let alias = 'Vendedor';
 
     let cols = {
-        id: {
+        id_vendedor: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        nombre_vendedor: {
+        dni: {
             type: dataTypes.STRING
         },
-        apellido_vendedor: {
+        nombre: {
+            type: dataTypes.STRING
+        },
+        apellido: {
             type: dataTypes.STRING
         },
         createdAt: {
@@ -34,7 +37,7 @@ module.exports = (sequelize, dataTypes) => {
     const Vendedor = sequelize.define(alias, cols, config)
 
     Vendedor.associate = function(models) {
-        Vendedor.hasMany(models.Cliente,{
+        Vendedor.hasMany(models.Cliente_persona,{
             foreignKey: 'Vendedor_id',
             as: 'vendedor'
         })

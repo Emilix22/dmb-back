@@ -5,13 +5,13 @@ const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 
 //Otra forma de llamar a los modelos
-const Clientes = db.Cliente;
+const Clientes_personas = db.Cliente_persona;
 const Levels = db.Level;
 
 const controller = {
 
     list: (req, res) => {
-        Clientes.findAll({include: [{association: 'vendedor'}]})
+        Clientes_personas.findAll({include: [{association: 'vendedor'}]})
         .then(clientes => {
             let lastuserIndex = clientes[clientes.length - 1]
             let lastUser = clientes.find(user => user.id == lastuserIndex.id)
@@ -30,7 +30,7 @@ const controller = {
     },
 
     findDNI: (req, res) => {
-        Clientes.findOne({
+        Clientes_personas.findOne({
             where: {dni: req.body.dni},
         })
         .then(client => {

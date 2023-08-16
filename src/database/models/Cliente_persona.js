@@ -1,9 +1,9 @@
 module.exports = (sequelize, dataTypes) => {
 
-    let alias = 'Cliente';
+    let alias = 'Cliente_persona';
 
     let cols = {
-        id: {
+        id_cliente_persona: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -15,9 +15,6 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING
         },
         dni: {
-            type: dataTypes.STRING
-        },
-        cuit: {
             type: dataTypes.STRING
         },
         email: {
@@ -50,14 +47,8 @@ module.exports = (sequelize, dataTypes) => {
         provincia: {
             type: dataTypes.STRING
         },
-        metodo_pago: {
-            type: dataTypes.STRING
-        },
-        numero_tarjeta: {
-            type: dataTypes.STRING
-        },
-        cbu: {
-            type: dataTypes.STRING
+        metodo_pago_id: {
+            type: dataTypes.INTEGER
         },
         vendedor_id: {
             type: dataTypes.INTEGER
@@ -74,24 +65,24 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: 'clientes',
+        tableName: 'clientes_personas',
         timestamps: true,
         paranoid: true
     };
 
-    const Cliente = sequelize.define(alias, cols, config)
+    const Cliente_persona = sequelize.define(alias, cols, config)
 
-    Cliente.associate = function(models) {
-        Cliente.belongsTo(models.Vendedor,{
+    Cliente_persona.associate = function(models) {
+        Cliente_persona.belongsTo(models.Vendedor,{
             foreignKey: 'vendedor_id',
             as: 'vendedor'
         }),
 
-        Cliente.hasMany(models.Poliza,{
-            foreignKey: 'cliente_id',
+        Cliente_persona.hasMany(models.Poliza,{
+            foreignKey: 'cliente_persona_id',
             as: 'clientes'
         })
     }
 
-    return Cliente;
+    return Cliente_persona;
 }

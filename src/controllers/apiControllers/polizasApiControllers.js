@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 
 //Otra forma de llamar a los modelos
 const Polizas = db.Poliza;
-const Clientes = db.Cliente;
+const Clientes_personas = db.Cliente_persona;
 
 const controller = {
 
@@ -29,7 +29,7 @@ const controller = {
 
     listForClientsAuto: (req, res) => {
         Polizas.findAll({
-            where: {cliente_id: req.body.id_client, tipo_id: 1},
+            where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 1},
             include: [{association: 'clientes'}, {association: 'autos'}]
         })
         .then(polizas => {
