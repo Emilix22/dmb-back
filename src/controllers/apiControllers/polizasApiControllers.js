@@ -10,7 +10,7 @@ const controller = {
 
     list: (req, res) => {
         Polizas.findAll({
-            include: [{association: 'clientes'}, {association: 'autos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'autos'}]
         })
         .then(polizas => {
             let info = {
@@ -30,7 +30,7 @@ const controller = {
     listForClientsAuto: (req, res) => {
         Polizas.findAll({
             where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 1},
-            include: [{association: 'clientes'}, {association: 'autos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'autos'}]
         })
         .then(polizas => {
             let info = {

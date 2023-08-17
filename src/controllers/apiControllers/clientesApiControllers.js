@@ -11,7 +11,7 @@ const Levels = db.Level;
 const controller = {
 
     list: (req, res) => {
-        Clientes_personas.findAll({include: [{association: 'vendedor'}]})
+        Clientes_personas.findAll({include: [{association: 'vendedores_cliente_persona'}]})
         .then(clientes => {
             let lastuserIndex = clientes[clientes.length - 1]
             let lastUser = clientes.find(user => user.id == lastuserIndex.id)
