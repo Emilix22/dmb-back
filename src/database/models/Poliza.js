@@ -52,14 +52,29 @@ module.exports = (sequelize, dataTypes) => {
 
     Poliza.associate = function(models) {
 
+        Poliza.belongsTo(models.Tipo_poliza,{
+            foreignKey: 'tipo_poliza_id',
+            as: 'tipos_polizas'
+        }),
+
         Poliza.belongsTo(models.Cliente_persona,{
             foreignKey: 'cliente_persona_id',
-            as: 'clientes'
+            as: 'clientes_personas_poliza'
         }),
 
         Poliza.belongsTo(models.Auto,{
             foreignKey: 'auto_id',
             as: 'autos'
+        }),
+
+        Poliza.belongsTo(models.Hogar,{
+            foreignKey: 'hogar_id',
+            as: 'hogares'
+        }),
+
+        Poliza.belongsTo(models.Aseguradora,{
+            foreignKey: 'aseguradora_id',
+            as: 'aseguradoras'
         })
     }   
 

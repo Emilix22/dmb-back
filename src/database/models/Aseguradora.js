@@ -1,20 +1,17 @@
 module.exports = (sequelize, dataTypes) => {
 
-    let alias = 'Vendedor';
+    let alias = 'Aseguradora';
 
     let cols = {
-        id_vendedor: {
+        id_aseguradora: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        dni: {
-            type: dataTypes.STRING
-        },
         nombre: {
             type: dataTypes.STRING
         },
-        apellido: {
+        telefono: {
             type: dataTypes.STRING
         },
         createdAt: {
@@ -29,25 +26,20 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: 'vendedores',
+        tableName: 'aseguradoras',
         timestamps: true,
         paranoid: true
     };
 
-    const Vendedor = sequelize.define(alias, cols, config)
+    const Aseguradora = sequelize.define(alias, cols, config)
 
-    Vendedor.associate = function(models) {
+    Aseguradora.associate = function(models) {
 
-        Vendedor.hasMany(models.Cliente_empresa,{
-            foreignKey: 'Vendedor_id',
-            as: 'vendedores_cliente_empresa'
-        }),
-
-        Vendedor.hasMany(models.Cliente_persona,{
-            foreignKey: 'Vendedor_id',
-            as: 'vendedores_cliente_persona'
+        Aseguradora.hasMany(models.Poliza,{
+            foreignKey: 'aseguradora_id',
+            as: 'aseguradoras'
         })
     }   
 
-    return Vendedor;
+    return Aseguradora;
 }

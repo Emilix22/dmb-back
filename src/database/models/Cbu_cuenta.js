@@ -1,21 +1,27 @@
 module.exports = (sequelize, dataTypes) => {
 
-    let alias = 'Vendedor';
+    let alias = 'Cbu_cuenta';
 
     let cols = {
-        id_vendedor: {
+        id_cbu_cuenta: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        dni: {
+        cbu_numero: {
             type: dataTypes.STRING
         },
-        nombre: {
+        cuenta_numero: {
             type: dataTypes.STRING
         },
-        apellido: {
+        cuenta_tipo: {
             type: dataTypes.STRING
+        },
+        banco: {
+            type: dataTypes.STRING
+        },
+        cliente_persona_id: {
+            type: dataTypes.INTEGER
         },
         createdAt: {
             type: dataTypes.DATE
@@ -29,25 +35,20 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: 'vendedores',
+        tableName: 'cbu_cuentas',
         timestamps: true,
         paranoid: true
     };
 
-    const Vendedor = sequelize.define(alias, cols, config)
+    const Cbu_cuenta = sequelize.define(alias, cols, config)
 
-    Vendedor.associate = function(models) {
+    Cbu_cuenta.associate = function(models) {
 
-        Vendedor.hasMany(models.Cliente_empresa,{
-            foreignKey: 'Vendedor_id',
-            as: 'vendedores_cliente_empresa'
-        }),
-
-        Vendedor.hasMany(models.Cliente_persona,{
-            foreignKey: 'Vendedor_id',
-            as: 'vendedores_cliente_persona'
+        Cbu_cuenta.belongsTo(models.Cliente_persona,{
+            foreignKey: 'cliente_persona_id',
+            as: 'clientes_personas_cbu_cuenta'
         })
     }   
 
-    return Vendedor;
+    return Cbu_cuenta;
 }

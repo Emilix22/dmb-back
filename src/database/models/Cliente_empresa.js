@@ -1,20 +1,23 @@
 module.exports = (sequelize, dataTypes) => {
 
-    let alias = 'Cliente_persona';
+    let alias = 'Cliente_empresa';
 
     let cols = {
-        id_cliente_persona: {
+        id_cliente_empresa: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        nombre: {
+        nombre_empresa: {
             type: dataTypes.STRING
         },
-        apellido: {
+        cuit: {
             type: dataTypes.STRING
         },
-        dni: {
+        nombre_contacto: {
+            type: dataTypes.STRING
+        },
+        dni_contacto: {
             type: dataTypes.STRING
         },
         email: {
@@ -65,44 +68,29 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: 'clientes_personas',
+        tableName: 'clientes_empresas',
         timestamps: true,
         paranoid: true
     };
 
-    const Cliente_persona = sequelize.define(alias, cols, config)
+    const Cliente_empresa = sequelize.define(alias, cols, config)
 
-    Cliente_persona.associate = function(models) {
-        Cliente_persona.belongsTo(models.Vendedor,{
+    Cliente_empresa.associate = function(models) {
+        Cliente_empresa.belongsTo(models.Vendedor,{
             foreignKey: 'vendedor_id',
-            as: 'vendedores_cliente_persona'
+            as: 'vendedores_cliente_empresa'
         }),
 
-        Cliente_persona.belongsTo(models.Metodo_pago,{
+        Cliente_empresa.belongsTo(models.Metodo_pago,{
             foreignKey: 'metodo_pago_id',
-            as: 'metodos_pagos_cliente_persona'
-        }),
+            as: 'metodos_pagos_cliente_empresa'
+        })
 
-        Cliente_persona.hasMany(models.Poliza,{
-            foreignKey: 'cliente_persona_id',
-            as: 'clientes_personas_poliza'
-        }),
-
-        Cliente_persona.hasMany(models.Cbu_cuenta,{
-            foreignKey: 'cliente_persona_id',
-            as: 'clientes_personas_cbu_cuenta'
-        }),
-
-        Cliente_persona.hasMany(models.Siniestro_auto,{
-            foreignKey: 'cliente_persona_id',
-            as: 'clientes_personas_siniestro_auto'
-        }),
-
-        Cliente_persona.hasMany(models.Tarjeta_credito,{
-            foreignKey: 'cliente_persona_id',
-            as: 'clientes_personas_tarjeta_credito'
+        Cliente_empresa.hasMany(models.Siniestro_auto,{
+            foreignKey: 'cliente_empresa_id',
+            as: 'clientes_empresas'
         })
     }
 
-    return Cliente_persona;
+    return Cliente_empresa;
 }
