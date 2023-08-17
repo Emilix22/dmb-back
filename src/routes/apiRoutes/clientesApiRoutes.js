@@ -13,9 +13,6 @@ router.get('/', clientesApiController.list);
 //Buscar un cliente por DNI
 router.post('/dni', clientesApiController.findDNI)
 
-// //login de usuario
-// router.post('/login', [validationsLogin], usersApiController.login);
-
 // //Listar usuarios eliminados
 // router.get('/removed', usersApiController.removed);
 // //Recuperar usuario eliminado

@@ -251,7 +251,7 @@ module.exports = (sequelize, dataTypes) => {
 
         Siniestro_auto.belongsTo(models.Cliente_empresa,{
             foreignKey: 'cliente_empresa_id',
-            as: 'clientes_empresas'
+            as: 'clientes_empresas_siniestro_auto'
         })
     }
 

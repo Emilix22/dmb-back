@@ -22,6 +22,9 @@ module.exports = (sequelize, dataTypes) => {
         cliente_persona_id: {
             type: dataTypes.INTEGER
         },
+        cliente_empresa_id: {
+            type: dataTypes.INTEGER
+        },
         auto_id: {
             type: dataTypes.INTEGER
         },
@@ -75,7 +78,13 @@ module.exports = (sequelize, dataTypes) => {
         Poliza.belongsTo(models.Aseguradora,{
             foreignKey: 'aseguradora_id',
             as: 'aseguradoras'
+        }),
+
+        Poliza.belongsTo(models.Cliente_empresa,{
+            foreignKey: 'cliente_empresa_id',
+            as: 'clientes_empresas_poliza'
         })
+        
     }   
 
     return Poliza;

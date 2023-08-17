@@ -23,6 +23,9 @@ module.exports = (sequelize, dataTypes) => {
         cliente_persona_id: {
             type: dataTypes.INTEGER
         },
+        cliente_empresa_id: {
+            type: dataTypes.INTEGER
+        },
         createdAt: {
             type: dataTypes.DATE
         },
@@ -47,7 +50,12 @@ module.exports = (sequelize, dataTypes) => {
         Tarjeta_credito.belongsTo(models.Cliente_persona,{
                 foreignKey: 'cliente_persona_id',
                 as: 'clientes_personas_tarjeta_credito'
-            })
+        }),
+
+        Tarjeta_credito.belongsTo(models.Cliente_empresa,{
+            foreignKey: 'cliente_empresa_id',
+            as: 'clientes_empresas_tarjeta_credito'
+        })
     }   
 
     return Tarjeta_credito;

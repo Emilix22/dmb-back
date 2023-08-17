@@ -84,11 +84,26 @@ module.exports = (sequelize, dataTypes) => {
         Cliente_empresa.belongsTo(models.Metodo_pago,{
             foreignKey: 'metodo_pago_id',
             as: 'metodos_pagos_cliente_empresa'
-        })
+        }),
 
         Cliente_empresa.hasMany(models.Siniestro_auto,{
             foreignKey: 'cliente_empresa_id',
-            as: 'clientes_empresas'
+            as: 'clientes_empresas_siniestro_auto'
+        }),
+
+        Cliente_empresa.hasMany(models.Cbu_cuenta,{
+            foreignKey: 'cliente_empresa_id',
+            as: 'clientes_empresas_cbu_cuenta'
+        }),
+
+        Cliente_empresa.hasMany(models.Poliza,{
+            foreignKey: 'cliente_empresa_id',
+            as: 'clientes_empresas_poliza'
+        }),
+
+        Cliente_empresa.hasMany(models.Tarjeta_credito,{
+            foreignKey: 'cliente_empresa_id',
+            as: 'clientes_empresas_Tarjeta_credito'
         })
     }
 
