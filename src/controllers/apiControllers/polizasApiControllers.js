@@ -39,7 +39,7 @@ const controller = {
                 meta: {
                     status : 200,
                     total: polizas.length,
-                    url: '/api/polizas'
+                    url: '/api/polizas/auto'
                 },
                 data: polizas
             }
@@ -59,7 +59,47 @@ const controller = {
                 meta: {
                     status : 200,
                     total: polizas.length,
-                    url: '/api/polizas'
+                    url: '/api/polizas/auto/porCliente'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listHome: (req, res) => {
+        Polizas.findAll({
+            where: {tipo_poliza_id: 2},
+            include: [{association: 'clientes_personas_poliza'}, {association: 'hogares'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/hogar'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listForClientsHome: (req, res) => {
+        Polizas.findAll({
+            where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 2},
+            include: [{association: 'clientes_personas_poliza'}, {association: 'hogares'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/hogar/porCliente'
                 },
                 data: polizas
             }

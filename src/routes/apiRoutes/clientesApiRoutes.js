@@ -18,8 +18,8 @@ router.post('/dni', clientesApiController.findDNI)
 // //Recuperar usuario eliminado
 // router.post('/restore/:id/', usersApiController.restore);
 
-// //crear usuario
-// router.post('/create',  upload.single('image'), validationImage, [validationsRegister], usersApiController.create);
+//crear cliente
+// router.post('/crear', [validationsRegister], usersApiController.create);
 
 // //editar usuario
 // router.put('/update/:id/', upload.single('image'), usersApiController.update);

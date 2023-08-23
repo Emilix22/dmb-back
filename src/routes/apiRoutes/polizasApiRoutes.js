@@ -13,5 +13,10 @@ router.get('/auto', polizasApiController.listCar)
 //polizas tipo auto por cliente
 router.post('/auto/porCliente', polizasApiController.listForClientsCar)
 
+//polizas tipo hogar
+router.get('/hogar', polizasApiController.listHome)
+
+//polizas tipo hogar por cliente
+router.post('/hogar/porCliente', polizasApiController.listForClientsHome)
 
 module.exports = router;
