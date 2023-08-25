@@ -10,6 +10,9 @@ module.exports = (sequelize, dataTypes) => {
         numero_poliza: {
             type: dataTypes.STRING
         },
+        cobertura: {
+            type: dataTypes.STRING
+        },
         vigencia_desde: {
             type: dataTypes.DATE
         },
@@ -28,7 +31,10 @@ module.exports = (sequelize, dataTypes) => {
         auto_id: {
             type: dataTypes.INTEGER
         },
-        hogar_id: {
+        moto_id: {
+            type: dataTypes.INTEGER
+        },
+        ubicacion_riesgo_id: {
             type: dataTypes.INTEGER
         },
         aseguradora_id: {
@@ -70,9 +76,14 @@ module.exports = (sequelize, dataTypes) => {
             as: 'autos'
         }),
 
-        Poliza.belongsTo(models.Hogar,{
-            foreignKey: 'hogar_id',
-            as: 'hogares'
+        Poliza.belongsTo(models.Moto,{
+            foreignKey: 'moto_id',
+            as: 'motos'
+        }),
+
+        Poliza.belongsTo(models.Ubicacion_riesgo,{
+            foreignKey: 'ubicacion_riesgo_id',
+            as: 'ubicaciones_riesgos'
         }),
 
         Poliza.belongsTo(models.Aseguradora,{

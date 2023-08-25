@@ -1,32 +1,29 @@
 module.exports = (sequelize, dataTypes) => {
 
-    let alias = 'Hogar';
+    let alias = 'Moto';
 
     let cols = {
-        id_hogar: {
+        id_moto: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        calle: {
+        marca: {
             type: dataTypes.STRING
         },
-        altura: {
+        modelo: {
             type: dataTypes.STRING
         },
-        piso: {
+        año: {
+            type: dataTypes.INTEGER
+        },
+        patente: {
             type: dataTypes.STRING
         },
-        departamento: {
+        chasis: {
             type: dataTypes.STRING
         },
-        cp: {
-            type: dataTypes.STRING
-        },
-        localidad: {
-            type: dataTypes.STRING
-        },
-        provincia: {
+        motor: {
             type: dataTypes.STRING
         },
         createdAt: {
@@ -41,20 +38,20 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: 'hogares',
+        tableName: 'motos',
         timestamps: true,
         paranoid: true
     };
 
-    const Hogar = sequelize.define(alias, cols, config)
+    const Moto = sequelize.define(alias, cols, config)
 
-    Hogar.associate = function(models) {
+    Moto.associate = function(models) {
 
-        Hogar.hasMany(models.Poliza,{
-            foreignKey: 'hogar_id',
-            as: 'hogares'
+        Moto.hasMany(models.Poliza,{
+            foreignKey: 'moto_id',
+            as: 'motos'
         })
     }   
 
-    return Hogar;
+    return Moto;
 }

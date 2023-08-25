@@ -1,29 +1,32 @@
 module.exports = (sequelize, dataTypes) => {
 
-    let alias = 'Auto';
+    let alias = 'Ubicacion_riesgo';
 
     let cols = {
-        id_auto: {
+        id_ubicacion_riesgo: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        marca: {
+        calle: {
             type: dataTypes.STRING
         },
-        modelo: {
+        altura: {
             type: dataTypes.STRING
         },
-        año: {
-            type: dataTypes.INTEGER
-        },
-        patente: {
+        piso: {
             type: dataTypes.STRING
         },
-        chasis: {
+        departamento: {
             type: dataTypes.STRING
         },
-        motor: {
+        cp: {
+            type: dataTypes.STRING
+        },
+        localidad: {
+            type: dataTypes.STRING
+        },
+        provincia: {
             type: dataTypes.STRING
         },
         createdAt: {
@@ -38,20 +41,20 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let config = {
-        tableName: 'autos',
+        tableName: 'ubicaciones_riesgos',
         timestamps: true,
         paranoid: true
     };
 
-    const Auto = sequelize.define(alias, cols, config)
+    const Ubicacion_riesgo = sequelize.define(alias, cols, config)
 
-    Auto.associate = function(models) {
+    Ubicacion_riesgo.associate = function(models) {
 
-        Auto.hasMany(models.Poliza,{
-            foreignKey: 'auto_id',
-            as: 'autos'
+        Ubicacion_riesgo.hasMany(models.Poliza,{
+            foreignKey: 'ubicacion_riesgo_id',
+            as: 'ubicaciones_riesgos'
         })
     }   
 
-    return Auto;
+    return Ubicacion_riesgo;
 }
