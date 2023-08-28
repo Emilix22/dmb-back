@@ -14,6 +14,15 @@ module.exports = (sequelize, dataTypes) => {
         cliente_empresa_id: {
             type: dataTypes.INTEGER
         },
+        fecha_siniestro: {
+            type: dataTypes.DATE
+        },
+        hora_siniestro: {
+            type: dataTypes.STRING
+        },
+        poliza_id: {
+            type: dataTypes.INTEGER
+        },
         motivo: {
             type: dataTypes.STRING
         },

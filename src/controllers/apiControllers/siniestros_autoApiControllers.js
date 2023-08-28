@@ -44,6 +44,9 @@ const controller = {
 
             cliente_persona_id: req.body.id_client,
             cliente_empresa_id: null,
+            fecha_siniestro: req.body.date,
+            hora_siniestro: req.body.hour,
+            poliza_id: req.body.policy,
             motivo: req.body.raison,
             consecuencia: req.body.consequence,
             lugar_calle: req.body.street,
