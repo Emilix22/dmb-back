@@ -5,12 +5,12 @@ const { Op } = require("sequelize");
 //Otra forma de llamar a los modelos
 const Siniestros_auto = db.Siniestro_auto;
 const Clientes_personas = db.Cliente_persona;
-
+//{association: 'clientes_personas_siniestro_auto'}, 
 const controller = {    
 
     list: (req, res) => {
         Siniestros_auto.findAll({
-            include: [{association: 'clientes_personas_siniestro_auto'}, {association: 'clientes_empresas_siniestro_auto'}]
+            include: [ {association: 'clientes_personas_siniestro_auto'}, {association: 'clientes_empresas_siniestro_auto'}]
         })
         .then(siniestros => {
             let info = {
@@ -40,10 +40,25 @@ const controller = {
         imgRegistroBack = req.files.license_back[0].filename;
         //imgDenuncia = req.body.complaint.name; 
 
+        let clientPeapol;
+        let clientCompany;
+
+        if(req.body.id_peapol) {
+            clientPeapol = req.body.id_peapol
+        } else {
+            clientPeapol = null
+        }
+
+        if(req.body.id_company) {
+            clientCompany = req.body.id_company
+        } else {
+            clientCompany = null
+        }
+
 		Siniestros_auto.create({
 
-            cliente_persona_id: req.body.id_client,
-            cliente_empresa_id: null,
+            cliente_persona_id: clientPeapol,
+            cliente_empresa_id: clientCompany,
             fecha_siniestro: req.body.date,
             hora_siniestro: req.body.hour,
             poliza_id: req.body.policy,

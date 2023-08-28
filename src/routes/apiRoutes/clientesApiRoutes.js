@@ -13,6 +13,10 @@ router.get('/', clientesApiController.list);
 //Buscar un cliente por DNI
 router.post('/dni', clientesApiController.findDNI)
 
+//Buscar un cliente por CUIT
+router.post('/cuit', clientesApiController.findCUIT)
+
+
 // //Listar usuarios eliminados
 // router.get('/removed', usersApiController.removed);
 // //Recuperar usuario eliminado

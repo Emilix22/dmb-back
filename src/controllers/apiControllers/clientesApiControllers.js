@@ -6,7 +6,7 @@ const { validationResult } = require('express-validator');
 
 //Otra forma de llamar a los modelos
 const Clientes_personas = db.Cliente_persona;
-const Levels = db.Level;
+const Clientes_empresas = db.Cliente_empresa;
 
 const controller = {
 
@@ -50,6 +50,28 @@ const controller = {
         })
         .catch(error => {console.log(error)});
         },
+
+        findCUIT: (req, res) => {
+            Clientes_empresas.findOne({
+                where: {cuit: req.body.cuit},
+            })
+            .then(client => {
+    
+                if (client) {
+                    let info = {
+                    meta: {
+                        status : 200,
+                        url: '/api/clientes/cuit'
+                    },
+                    data: client 
+                };
+                return res.status(200).json(info);
+                } else {
+                    return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun cliente con ese N° de CUIT'})
+                }    
+            })
+            .catch(error => {console.log(error)});
+            },
     
 /************************************************************************************************************** */                          
     login: (req, res) => {

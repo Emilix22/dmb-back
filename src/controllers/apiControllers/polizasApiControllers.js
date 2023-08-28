@@ -12,7 +12,7 @@ const controller = {
 
     list: (req, res) => {
         Polizas.findAll({
-            include: [{association: 'clientes_personas_poliza'}, {association: 'autos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'autos'}]
         })
         .then(polizas => {
             let info = {
@@ -32,7 +32,7 @@ const controller = {
     listCar: (req, res) => {
         Polizas.findAll({
             where: {tipo_poliza_id: 1},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'autos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'autos'}]
         })
         .then(polizas => {
             let info = {
@@ -69,10 +69,30 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
+    listForCompanyCar: (req, res) => {
+        Polizas.findAll({
+            where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 1},
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'autos'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/auto/porEmpresa'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
     listHome: (req, res) => {
         Polizas.findAll({
             where: {tipo_poliza_id: 2},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'ubicaciones_riesgos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
         })
         .then(polizas => {
             let info = {
@@ -100,6 +120,26 @@ const controller = {
                     status : 200,
                     total: polizas.length,
                     url: '/api/polizas/hogar/porCliente'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listForCompanyHome: (req, res) => {
+        Polizas.findAll({
+            where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 2},
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/hogar/porEmpresa'
                 },
                 data: polizas
             }
