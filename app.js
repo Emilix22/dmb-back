@@ -10,6 +10,7 @@ const productsApiRoutes = require('./src/routes/apiRoutes/productsApiRoutes');//
 const polizasApiRoutes = require('./src/routes/apiRoutes/polizasApiRoutes');
 const clientesApiRoutes = require('./src/routes/apiRoutes/clientesApiRoutes');
 const siniestros_autoApiRoutes = require('./src/routes/apiRoutes/siniestros_autoApiRoutes');
+const siniestros_hogarApiRoutes = require('./src/routes/apiRoutes/siniestros_hogarApiRoutes');
 
 app.set('view engine', 'ejs');// si no va a tener vistas desinstalar
 app.use(methodOverride('_method'));
@@ -30,6 +31,7 @@ app.use('/api/products', productsApiRoutes);// eliminar luego
 app.use('/api/polizas', polizasApiRoutes);
 app.use('/api/clientes', clientesApiRoutes);
 app.use('/api/siniestros_auto', siniestros_autoApiRoutes);
+app.use('/api/siniestros_hogar', siniestros_hogarApiRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

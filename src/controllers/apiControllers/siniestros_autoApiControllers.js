@@ -29,7 +29,7 @@ const controller = {
 
     create: (req, res) => {
 
-        // console.log(req.body)
+        console.log(req.body)
         // console.log(req.files.license_front[0].filename)
 
 		let imgRegistroFront;

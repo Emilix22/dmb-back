@@ -94,6 +94,16 @@ module.exports = (sequelize, dataTypes) => {
         Poliza.belongsTo(models.Cliente_empresa,{
             foreignKey: 'cliente_empresa_id',
             as: 'clientes_empresas_poliza'
+        }),
+
+        Poliza.hasMany(models.Siniestro_hogar,{
+            foreignKey: 'poliza_id',
+            as: 'polizas_siniestro_hogar'
+        }),
+
+        Poliza.hasMany(models.Siniestro_auto,{
+            foreignKey: 'poliza_id',
+            as: 'polizas_siniestro_auto'
         })
         
     }   
