@@ -44,6 +44,7 @@ const controller = {
 
         if(req.body.id_client) {
             clientPeapol = req.body.id_client
+        } else {
             clientPeapol = null
         }
 

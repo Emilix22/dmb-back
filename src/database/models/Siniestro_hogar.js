@@ -122,10 +122,10 @@ module.exports = (sequelize, dataTypes) => {
         otro_tipo_de_bienes: {
             type: dataTypes.BOOLEAN
         },
-        description: {
+        descripcion_hechos: {
             type: dataTypes.BOOLEAN
         },
-        affected_objects: {
+        bienes_afectados: {
             type: dataTypes.BOOLEAN
         },
         createdAt: {
