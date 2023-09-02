@@ -11,7 +11,7 @@ const Clientes_empresas = db.Cliente_empresa;
 const controller = {
 
     list: (req, res) => {
-        Clientes_personas.findAll({include: [{association: 'vendedores_cliente_persona'}]})
+        Clientes_personas.findAll({include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]})
         .then(clientes => {
             let lastuserIndex = clientes[clientes.length - 1]
             let lastUser = clientes.find(user => user.id == lastuserIndex.id)
