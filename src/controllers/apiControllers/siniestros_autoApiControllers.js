@@ -10,7 +10,7 @@ const controller = {
 
     list: (req, res) => {
         Siniestros_auto.findAll({
-            include: [ {association: 'clientes_personas_siniestro_auto'}, {association: 'clientes_empresas_siniestro_auto'}]
+            include: [{association: 'polizas_siniestro_auto'}, {association: 'clientes_personas_siniestro_auto'}, {association: 'clientes_empresas_siniestro_auto'}]
         })
         .then(siniestros => {
             let info = {
