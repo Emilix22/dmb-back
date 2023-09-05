@@ -233,6 +233,15 @@ module.exports = (sequelize, dataTypes) => {
         vti_aseguradora: {
             type: dataTypes.STRING
         },
+        vti_nombre: {
+            type: dataTypes.STRING
+        },
+        vti_apellido: {
+            type: dataTypes.STRING
+        },
+        vti_dni: {
+            type: dataTypes.STRING
+        },
         createdAt: {
             type: dataTypes.DATE
         },

@@ -29,6 +29,29 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
+    findId: (req, res) => {
+        Polizas.findAll({
+            where: {cliente_persona_id: req.body.id},
+            include: [{association: 'tipos_polizas'}, {association: 'clientes_personas_poliza'}, {association: 'autos'}, {association: 'motos'}, {association: 'ubicaciones_riesgos'}, {association: 'aseguradoras'}]
+        })
+        .then(polizas => {
+
+            if (polizas) {
+                let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/polizas/id'
+                },
+                data: polizas 
+            };
+            return res.status(200).json(info);
+            } else {
+                return res.status(401).json({error: 'Lo sentimos, no existen en nuestros registros pólizas para el cliente seleccionado'})
+            }    
+        })
+        .catch(error => {console.log(error)});
+        },
+
     listCar: (req, res) => {
         Polizas.findAll({
             where: {tipo_poliza_id: 1},

@@ -7,6 +7,9 @@ const polizasApiController = require('../../controllers/apiControllers/polizasAp
 //Todas las pólizas
 router.get('/', polizasApiController.list);
 
+//Buscar polizas por cliente Id
+router.post('/:id', polizasApiController.findId)
+
 //polizas tipo auto
 router.get('/auto', polizasApiController.listCar)
 

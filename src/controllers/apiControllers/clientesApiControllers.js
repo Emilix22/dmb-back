@@ -32,6 +32,7 @@ const controller = {
     findDNI: (req, res) => {
         Clientes_personas.findOne({
             where: {dni: req.body.dni},
+            include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]
         })
         .then(client => {
 
@@ -50,6 +51,29 @@ const controller = {
         })
         .catch(error => {console.log(error)});
         },
+
+        findId: (req, res) => {
+            Clientes_personas.findOne({
+                where: {id_cliente_persona: req.body.id},
+                include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]
+            })
+            .then(client => {
+    
+                if (client) {
+                    let info = {
+                    meta: {
+                        status : 200,
+                        url: '/api/clientes/id'
+                    },
+                    data: client 
+                };
+                return res.status(200).json(info);
+                } else {
+                    return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun cliente con ese N° de identificación'})
+                }    
+            })
+            .catch(error => {console.log(error)});
+            },
 
         findCUIT: (req, res) => {
             Clientes_empresas.findOne({

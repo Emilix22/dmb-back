@@ -7,11 +7,14 @@ const validationImage = require ('../../middlewares/validationImage')
 
 const clientesApiController = require('../../controllers/apiControllers/clientesApiControllers');
 
-//Todos los clientes
+//Todos los clientes personas
 router.get('/', clientesApiController.list);
 
 //Buscar un cliente por DNI
 router.post('/dni', clientesApiController.findDNI)
+
+//Buscar un cliente por Id
+router.post('/id', clientesApiController.findId)
 
 //Buscar un cliente por CUIT
 router.post('/cuit', clientesApiController.findCUIT)
@@ -22,8 +25,8 @@ router.post('/cuit', clientesApiController.findCUIT)
 // //Recuperar usuario eliminado
 // router.post('/restore/:id/', usersApiController.restore);
 
-//crear cliente
-// router.post('/crear', [validationsRegister], usersApiController.create);
+//crear cliente persona
+//router.post('/personas/crear', [validationsRegister], usersApiController.create);
 
 // //editar usuario
 // router.put('/update/:id/', upload.single('image'), usersApiController.update);
