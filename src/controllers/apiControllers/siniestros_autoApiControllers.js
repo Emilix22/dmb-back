@@ -38,7 +38,7 @@ const controller = {
 		
         imgRegistroFront = req.files.license_front[0].filename;
         imgRegistroBack = req.files.license_back[0].filename;
-        //imgDenuncia = req.body.complaint.name; 
+        imgDenuncia = req.files.police_complaint[0].filename; 
 
         let clientPeapol;
         let clientCompany;
@@ -64,6 +64,7 @@ const controller = {
             poliza_id: req.body.policy,
             motivo: req.body.raison,
             consecuencia: req.body.consequence,
+            denuncia_policial: imgDenuncia,
             lugar_calle: req.body.street,
             lugar_altura: req.body.door,
             lugar_cp: req.body.postalCode,

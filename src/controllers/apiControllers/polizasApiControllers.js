@@ -114,7 +114,7 @@ const controller = {
 
     listHome: (req, res) => {
         Polizas.findAll({
-            where: {tipo_poliza_id: 2},
+            where: {tipo_poliza_id: 3},
             include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
         })
         .then(polizas => {
@@ -134,7 +134,7 @@ const controller = {
 
     listForClientsHome: (req, res) => {
         Polizas.findAll({
-            where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 2},
+            where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 3},
             include: [{association: 'clientes_personas_poliza'}, {association: 'ubicaciones_riesgos'}]
         })
         .then(polizas => {
@@ -154,7 +154,7 @@ const controller = {
 
     listForCompanyHome: (req, res) => {
         Polizas.findAll({
-            where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 2},
+            where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 3},
             include: [{association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
         })
         .then(polizas => {

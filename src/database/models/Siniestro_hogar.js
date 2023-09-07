@@ -38,11 +38,17 @@ module.exports = (sequelize, dataTypes) => {
         robo_mobiliario: {
             type: dataTypes.BOOLEAN
         },
+        denuncia_mobiliario: {
+            type: dataTypes.STRING
+        },
         notebook_rotura: {
             type: dataTypes.BOOLEAN
         },
         notebook_robo: {
             type: dataTypes.BOOLEAN
+        },
+        denuncia_notebook: {
+            type: dataTypes.STRING
         },
         electrodomesticos_rotura: {
             type: dataTypes.BOOLEAN
@@ -50,8 +56,14 @@ module.exports = (sequelize, dataTypes) => {
         electrodomesticos_robo: {
             type: dataTypes.BOOLEAN
         },
+        denuncia_electro: {
+            type: dataTypes.STRING
+        },
         bicicletas_robo: {
             type: dataTypes.BOOLEAN
+        },
+        denuncia_bicicleta: {
+            type: dataTypes.STRING
         },
         por_agua_daños_al_mobiliario: {
             type: dataTypes.BOOLEAN

@@ -30,15 +30,36 @@ const controller = {
     create: (req, res) => {
 
         console.log(req.body)
-        // console.log(req.files.license_front[0].filename)
-
-		//let imgRegistroFront;
-        //let imgRegistroBack;
-        //let imgDenuncia;
+/***************************denuncias policiales*********************************** */
+		let imgDenuncia_mobiliario;
+        let imgDenuncia_notebook;
+        let imgDenuncia_electro;
+        let imgDenuncia_bicicleta;
 		
-        //imgRegistroFront = req.files.license_front[0].filename;
-        //imgRegistroBack = req.files.license_back[0].filename;
-        //imgDenuncia = req.body.complaint.name;
+        if (req.files.denuncia_mobiliario[0]) {
+            imgDenuncia_mobiliario = req.files.denuncia_mobiliario[0].filename;
+        } else {
+            imgDenuncia_mobiliario = null
+        }
+
+        if (req.files.denuncia_notebook[0]) {
+            imgDenuncia_notebook = req.files.denuncia_notebook[0].filename;
+        } else {
+            imgDenuncia_notebook = null
+        }
+        
+        if (req.files.denuncia_electro[0]) {
+            imgDenuncia_electro = req.files.denuncia_electro[0].filename;
+        } else {
+            imgDenuncia_electro = null
+        }
+        if (req.files.denuncia_bicicleta[0]) {
+            imgDenuncia_bicicleta = req.files.denuncia_bicicleta[0].filename;
+        } else {
+            imgDenuncia_bicicleta = null
+        }
+
+/*******************************cliente persona o empresa****************************** */
         let clientPeapol;
         let clientCompany;
 
@@ -61,42 +82,25 @@ const controller = {
             fecha_siniestro: req.body.date,
             hora_siniestro: req.body.hour + ":" + req.body.minutes,
             poliza_id: req.body.policy,
-            incendio_contenido_total: req.body.consequence.incendio_contenido_total,
-            incendio_contenido_parcial: req.body.consequence.incendio_contenido_parcial,
-            incendio_edificio_total: req.body.consequence.incendio_edificio_total,
-            incendio_edificio_parcial: req.body.consequence.incendio_edificio_parcial,
-            granizo: req.body.consequence.granizo,
-            vientos_fuertes: req.body.consequence.vientos_fuertes,
-            impacto_en_vehiculos_terrestres: req.body.consequence.impacto_en_vehículos_terrestres,
-            rayo_directo: req.body.consequence.rayo_directo,
-            linderos: req.body.consequence.linderos,
-            cristales_rotura_accidental: req.body.consequence.cristales_rotura_accidental,
-            cristales_rajadura_accidental: req.body.consequence.cristales_rajadura_accidental,
-            mobiliario_daño_parcial: req.body.consequence.mobiliario_daño_parcial,
-            mobiliario_robo_parcial: req.body.consequence.mobiliario_robo_parcial,
-            mobiliario_robo_total: req.body.consequence.mobiliario_robo_total,
-            objetos_daño_parcial: req.body.consequence.objetos_daño_parcial,
-            objetos_daño_total: req.body.consequence.objetos_daño_total,
-            objetos_robo_total: req.body.consequence.objetos_robo_total,
-            notebook_daño_parcial: req.body.consequence.notebook_daño_parcial,
-            notebook_daño_total: req.body.consequence.notebook_daño_total,
-            notebook_robo_parcial: req.body.consequence.notebook_robo_parcial,
-            notebook_robo_total: req.body.consequence.notebook_robo_total,
-            electronicos_robo: req.body.consequence.electrónicos_robo,
-            electronicos_daño_parcial_accidente: req.body.consequence.electrónicos_daño_parcial_accidente,
-            electronicos_daño_parcial_alta_baja_tension: req.body.consequence.electrónicos_daño_parcial_alta_baja_tensión,
-            electronicos_daño_total_accidente: req.body.consequence.electrónicos_daño_total_accidente,
-            electronicos_daño_total_alta_baja_tension: req.body.consequence.electrónicos_daño_total_alta_baja_tensión,
-            bicicletas_robo: req.body.consequence.bicicletas_robo,
-            bicicletas_incendio: req.body.consequence.bicicletas_incendio,
-            por_agua_daños_al_mobiliario: req.body.consequence.por_agua_daños_al_mobiliario,
-            daños_a_objetos: req.body.consequence.daños_a_objetos,
-            lesiones_a_personas: req.body.consequence.lesiones_a_personas,
-            muerte_a_personas: req.body.consequence.muerte_a_personas,
-            otro_tipo_de_bienes: req.body.consequence.otro_tipo_de_bienes,
-            descripcion_hechos: req.body.description,
-            bienes_afectados: req.body.affected_objects
-            
+            incendio_contenido: req.body.incendio_contenido,
+            incendio_edificio: req.body.incendio_edificio,
+            incendio_edificio_parcial: req.body.incendio_edificio_parcial,
+            cristales_rotura_accidental: req.body.cristales_rotura_accidental,
+            cristales_rajadura_accidental: req.body.cristales_rajadura_accidental,
+            robo_mobiliario: req.body.robo_mobiliario,
+            denuncia_mobiliario : imgDenuncia_mobiliario,
+            notebook_rotura: req.body.notebook_rotura,
+            notebook_robo: req.body.notebook_robo,
+            denuncia_notebook: imgDenuncia_notebook,
+            electrodomesticos_rotura: req.body.electrodomesticos_rotura,
+            electrodomesticos_robo: req.body.electrodomesticos_robo,
+            denuncia_electro: imgDenuncia_electro,
+            bicicletas_robo: req.body.bicicletas_robo,
+            denuncia_bicicleta: imgDenuncia_bicicleta,
+            por_agua_daños_al_mobiliario: req.body.por_agua_daños_al_mobiliario,
+            otro_tipo_de_bienes: req.body.otro_tipo_de_bienes,
+            descripcion_hechos: req.body.descripcion_hechos,
+            bienes_afectados: req.body.bienes_afectados    
              
         })
         .then(siniestro_hogar => {

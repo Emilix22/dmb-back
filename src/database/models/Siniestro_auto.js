@@ -29,6 +29,9 @@ module.exports = (sequelize, dataTypes) => {
         consecuencia: {
             type: dataTypes.STRING
         },
+        denuncia_policial: {
+            type: dataTypes.STRING
+        },
         lugar_calle: {
             type: dataTypes.STRING
         },

@@ -1,6 +1,6 @@
 const validationImage = (req, res, next) => {
 
-    let acceptedExtensions = ['jpg', 'png', 'jpeg', 'webp'];
+    let acceptedExtensions = ['jpg', 'png', 'jpeg', 'webp', 'pdf'];
 
     if(req.file) {
         let fileExtension = req.file.mimetype.split('/').pop();
