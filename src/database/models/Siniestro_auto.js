@@ -45,10 +45,10 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING
         },
         descripcion_hechos: {
-            type: dataTypes.INTEGER
+            type: dataTypes.STRING
         },
         lugar_caracteristicas: {
-            type: dataTypes.INTEGER
+            type: dataTypes.STRING
         },
         registro_frente: {
             type: dataTypes.STRING
@@ -241,7 +241,7 @@ module.exports = (sequelize, dataTypes) => {
         },
         vti_dni: {
             type: dataTypes.STRING
-        },
+        },    
         createdAt: {
             type: dataTypes.DATE
         },

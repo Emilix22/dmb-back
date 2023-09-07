@@ -3,13 +3,13 @@ const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 
 //Otra forma de llamar a los modelos
-const Siniestros_auto = db.Siniestro_auto;
+const Siniestros = db.Siniestro_auto;
 const Clientes_personas = db.Cliente_persona;
-//{association: 'clientes_personas_siniestro_auto'}, 
+
 const controller = {    
 
     list: (req, res) => {
-        Siniestros_auto.findAll({
+        Siniestros.findAll({
             include: [{association: 'polizas_siniestro_auto'}, {association: 'clientes_personas_siniestro_auto'}, {association: 'clientes_empresas_siniestro_auto'}]
         })
         .then(siniestros => {
@@ -55,8 +55,8 @@ const controller = {
             clientCompany = null
         }
 
-		Siniestros_auto.create({
-
+		Siniestros.create({
+            tipo_siniestro_id: req.body.type,
             cliente_persona_id: clientPeapol,
             cliente_empresa_id: clientCompany,
             fecha_siniestro: req.body.date,
@@ -131,8 +131,11 @@ const controller = {
             lfv_telefono4: req.body.iic_phone4,
             lfv_telefono5: req.body.iic_phone5,
             vti_patente: req.body.oc_patent,
-            vti_aseguradora: req.body.oc_insurance
-             
+            vti_aseguradora: req.body.oc_insurance,
+            vti_nombre: req.body.oc_name,
+            vti_apellido: req.body.oc_surname,
+            vti_dni: req.body.oc_dni
+    
         })
         .then(siniestro_auto => {
             let info = {

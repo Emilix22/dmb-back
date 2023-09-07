@@ -47,8 +47,8 @@ module.exports = (sequelize, dataTypes) => {
         nacimiento: {
             type: dataTypes.DATE
         },
-        nivel_permiso: {
-            type: dataTypes.STRING
+        nivel_permiso_id: {
+            type: dataTypes.INTEGER
         },
         puesto: {
             type: dataTypes.STRING
@@ -72,6 +72,12 @@ module.exports = (sequelize, dataTypes) => {
 
     const Usuario = sequelize.define(alias, cols, config)
 
-    
+    Usuario.associate = function(models) {
+
+        Usuario.hasMany(models.Permiso_usuario,{
+            foreignKey: 'nivel_permiso_id',
+            as: 'permisos_usuario'
+        })
+    }
     return Usuario;
 }

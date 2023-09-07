@@ -23,31 +23,10 @@ module.exports = (sequelize, dataTypes) => {
         poliza_id: {
             type: dataTypes.INTEGER
         },
-        incendio_contenido_total: {
+        incendio_contenido: {
             type: dataTypes.BOOLEAN
         },
-        incendio_contenido_parcial: {
-            type: dataTypes.BOOLEAN
-        },
-        incendio_edificio_total: {
-            type: dataTypes.BOOLEAN
-        },
-        incendio_edificio_parcial: {
-            type: dataTypes.BOOLEAN
-        },
-        granizo: {
-            type: dataTypes.BOOLEAN
-        },
-        vientos_fuertes: {
-            type: dataTypes.BOOLEAN
-        },
-        impacto_en_vehiculos_terrestres: {
-            type: dataTypes.BOOLEAN
-        },
-        rayo_directo: {
-            type: dataTypes.BOOLEAN
-        },
-        linderos: {
+        incendio_edificio: {
             type: dataTypes.BOOLEAN
         },
         cristales_rotura_accidental: {
@@ -56,77 +35,35 @@ module.exports = (sequelize, dataTypes) => {
         cristales_rajadura_accidental: {
             type: dataTypes.BOOLEAN
         },
-        mobiliario_daño_parcial: {
+        robo_mobiliario: {
             type: dataTypes.BOOLEAN
         },
-        mobiliario_robo_parcial: {
+        notebook_rotura: {
             type: dataTypes.BOOLEAN
         },
-        mobiliario_robo_total: {
+        notebook_robo: {
             type: dataTypes.BOOLEAN
         },
-        objetos_daño_parcial: {
+        electrodomesticos_rotura: {
             type: dataTypes.BOOLEAN
         },
-        objetos_daño_total: {
-            type: dataTypes.BOOLEAN
-        },
-        objetos_robo_total: {
-            type: dataTypes.BOOLEAN
-        },
-        notebook_daño_parcial: {
-            type: dataTypes.BOOLEAN
-        },
-        notebook_daño_total: {
-            type: dataTypes.BOOLEAN
-        },
-        notebook_robo_parcial: {
-            type: dataTypes.BOOLEAN
-        },
-        notebook_robo_total: {
-            type: dataTypes.BOOLEAN
-        },
-        electronicos_robo: {
-            type: dataTypes.BOOLEAN
-        },
-        electronicos_daño_parcial_accidente: {
-            type: dataTypes.BOOLEAN
-        },
-        electronicos_daño_parcial_alta_baja_tension: {
-            type: dataTypes.BOOLEAN
-        },
-        electronicos_daño_total_accidente: {
-            type: dataTypes.BOOLEAN
-        },
-        electronicos_daño_total_alta_baja_tension: {
+        electrodomesticos_robo: {
             type: dataTypes.BOOLEAN
         },
         bicicletas_robo: {
             type: dataTypes.BOOLEAN
         },
-        bicicletas_incendio: {
-            type: dataTypes.BOOLEAN
-        },
         por_agua_daños_al_mobiliario: {
-            type: dataTypes.BOOLEAN
-        },
-        daños_a_objetos: {
-            type: dataTypes.BOOLEAN
-        },
-        lesiones_a_personas: {
-            type: dataTypes.BOOLEAN
-        },
-        muerte_a_personas: {
             type: dataTypes.BOOLEAN
         },
         otro_tipo_de_bienes: {
             type: dataTypes.BOOLEAN
         },
         descripcion_hechos: {
-            type: dataTypes.BOOLEAN
+            type: dataTypes.STRING
         },
         bienes_afectados: {
-            type: dataTypes.BOOLEAN
+            type: dataTypes.STRING
         },
         createdAt: {
             type: dataTypes.DATE
