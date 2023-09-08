@@ -112,6 +112,66 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
+    listMoto: (req, res) => {
+        Polizas.findAll({
+            where: {tipo_poliza_id: 2},
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'motos'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/moto'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listForClientsMoto: (req, res) => {
+        Polizas.findAll({
+            where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 2},
+            include: [{association: 'clientes_personas_poliza'}, {association: 'motos'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/moto/porCliente'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listForCompanyMoto: (req, res) => {
+        Polizas.findAll({
+            where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 2},
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'motos'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/moto/porEmpresa'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
     listHome: (req, res) => {
         Polizas.findAll({
             where: {tipo_poliza_id: 3},

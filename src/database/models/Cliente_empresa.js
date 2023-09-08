@@ -91,6 +91,11 @@ module.exports = (sequelize, dataTypes) => {
             as: 'clientes_empresas_siniestro_auto'
         }),
 
+        Cliente_empresa.hasMany(models.Siniestro_moto,{
+            foreignKey: 'cliente_empresa_id',
+            as: 'clientes_empresas_siniestro_moto'
+        }),
+
         Cliente_empresa.hasMany(models.Siniestro_hogar,{
             foreignKey: 'cliente_empresa_id',
             as: 'clientes_empresas_siniestro_hogar'

@@ -98,6 +98,11 @@ module.exports = (sequelize, dataTypes) => {
             as: 'clientes_personas_siniestro_auto'
         }),
 
+        Cliente_persona.hasMany(models.Siniestro_moto,{
+            foreignKey: 'cliente_persona_id',
+            as: 'clientes_personas_siniestro_moto'
+        }),
+
         Cliente_persona.hasMany(models.Siniestro_hogar,{
             foreignKey: 'cliente_persona_id',
             as: 'clientes_personas_siniestro_hogar'

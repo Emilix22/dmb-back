@@ -3,21 +3,21 @@ const sequelize = db.sequelize;
 const { Op } = require("sequelize");
 
 //Otra forma de llamar a los modelos
-const Siniestros = db.Siniestro_auto;
+const Siniestros = db.Siniestro_moto;
 const Clientes_personas = db.Cliente_persona;
 
 const controller = {    
 
     list: (req, res) => {
         Siniestros.findAll({
-            include: [{association: 'polizas_siniestro_auto'}, {association: 'clientes_personas_siniestro_auto'}, {association: 'clientes_empresas_siniestro_auto'}]
+            include: [{association: 'polizas_siniestro_moto'}, {association: 'clientes_personas_siniestro_moto'}, {association: 'clientes_empresas_siniestro_moto'}]
         })
         .then(siniestros => {
             let info = {
                 meta: {
                     status : 200,
                     total: siniestros.length,
-                    url: '/api/siniestros_auto'
+                    url: '/api/siniestros_moto'
                 },
                 data: siniestros
             }
@@ -30,22 +30,20 @@ const controller = {
     create: (req, res) => {
 
         console.log(req.body)
-        console.log(req.files)
         // console.log(req.files.license_front[0].filename)
 
-        let imgDenuncia = null;
+		let imgRegistroFront;
+        let imgRegistroBack;
+        let imgDenuncia;
 		
+        imgRegistroFront = req.files.license_front[0].filename;
+        imgRegistroBack = req.files.license_back[0].filename;
+
         if (req.files.police_complaint) {
-            imgDenuncia = req.files.police_complaint[0].filename; 
+            imgDenuncia = req.files.police_complaint[0].filename;
         } else {
             imgDenuncia = null
         }
-        
-        let imgRegistroFront;
-        let imgRegistroBack;
-
-        imgRegistroFront = req.files.license_front[0].filename;
-        imgRegistroBack = req.files.license_back[0].filename;
 
         let clientPeapol;
         let clientCompany;
@@ -63,7 +61,6 @@ const controller = {
         }
 
 		Siniestros.create({
-            tipo_siniestro_id: req.body.type,
             cliente_persona_id: clientPeapol,
             cliente_empresa_id: clientCompany,
             fecha_siniestro: req.body.date,
@@ -99,24 +96,12 @@ const controller = {
             ldv_cantidad: req.body.iic_quantity,
             ldv_nombre1: req.body.iic_name1,
             ldv_nombre2: req.body.iic_name2,
-            ldv_nombre3: req.body.iic_name3,
-            ldv_nombre4: req.body.iic_name4,
-            ldv_nombre5: req.body.iic_name5,
             ldv_apellido1: req.body.iic_surname1,
             ldv_apellido2: req.body.iic_surname2,
-            ldv_apellido3: req.body.iic_surname3,
-            ldv_apellido4: req.body.iic_surname4,
-            ldv_apellido5: req.body.iic_surname5,
             ldv_dni1: req.body.iic_dni1,
             ldv_dni2: req.body.iic_dni2,
-            ldv_dni3: req.body.iic_dni3,
-            ldv_dni4: req.body.iic_dni4,
-            ldv_dni5: req.body.iic_dni5,
             ldv_telefono1: req.body.iic_phone1,
             ldv_telefono2: req.body.iic_phone2,
-            ldv_telefono3: req.body.iic_phone3,
-            ldv_telefono4: req.body.iic_phone4,
-            ldv_telefono5: req.body.iic_phone5,
             lfv_cantidad: req.body.ioc_quantity,
             lfv_nombre1: req.body.iic_name1,
             lfv_nombre2: req.body.iic_name2,
@@ -145,13 +130,13 @@ const controller = {
             vti_dni: req.body.oc_dni
     
         })
-        .then(siniestro_auto => {
+        .then(siniestro_moto => {
             let info = {
                 meta: {
                     status : 200,
-                    url: '/api/siniestros_auto/crear'
+                    url: '/api/siniestros_moto/crear'
                 },
-                data: siniestro_auto
+                data: siniestro_moto
             }
             return res.status(200).json(info)
         })
