@@ -101,6 +101,11 @@ module.exports = (sequelize, dataTypes) => {
             as: 'polizas_siniestro_hogar'
         }),
 
+        Poliza.hasMany(models.Siniestro_consorcio,{
+            foreignKey: 'poliza_id',
+            as: 'polizas_siniestro_consorcio'
+        }),
+
         Poliza.hasMany(models.Siniestro_auto,{
             foreignKey: 'poliza_id',
             as: 'polizas_siniestro_auto'

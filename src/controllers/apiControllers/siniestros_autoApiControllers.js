@@ -29,8 +29,8 @@ const controller = {
 
     create: (req, res) => {
 
-        console.log(req.body)
-        console.log(req.files)
+        //console.log(req.body)
+        //console.log(req.files)
         // console.log(req.files.license_front[0].filename)
 
         let imgDenuncia = null;

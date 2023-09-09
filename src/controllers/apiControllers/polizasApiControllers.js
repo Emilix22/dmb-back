@@ -230,6 +230,66 @@ const controller = {
             return res.status(200).json(info)
         })
         .catch(error => {console.log(error)});
+    },
+
+    listConsortium: (req, res) => {
+        Polizas.findAll({
+            where: {tipo_poliza_id: 4},
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/consorcio'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listForClientsConsortium: (req, res) => {
+        Polizas.findAll({
+            where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 4},
+            include: [{association: 'clientes_personas_poliza'}, {association: 'ubicaciones_riesgos'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/consorcio/porCliente'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listForCompanyConsortium: (req, res) => {
+        Polizas.findAll({
+            where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 4},
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/consorcio/porEmpresa'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
     }
 
 };

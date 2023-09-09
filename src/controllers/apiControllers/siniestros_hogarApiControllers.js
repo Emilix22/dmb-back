@@ -29,7 +29,7 @@ const controller = {
 
     create: (req, res) => {
 
-        console.log(req.body)
+        //console.log(req.body)
 /***************************denuncias policiales*********************************** */
 		let imgDenuncia_mobiliario;
         let imgDenuncia_notebook;
@@ -84,7 +84,6 @@ const controller = {
             poliza_id: req.body.policy,
             incendio_contenido: req.body.incendio_contenido,
             incendio_edificio: req.body.incendio_edificio,
-            incendio_edificio_parcial: req.body.incendio_edificio_parcial,
             cristales_rotura_accidental: req.body.cristales_rotura_accidental,
             cristales_rajadura_accidental: req.body.cristales_rajadura_accidental,
             robo_mobiliario: req.body.robo_mobiliario,
