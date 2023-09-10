@@ -46,4 +46,13 @@ router.post('/consorcio/porCliente', polizasApiController.listForClientsConsorti
 //polizas tipo consorcio por empresa
 router.post('/consorcio/porEmpresa', polizasApiController.listForCompanyConsortium)
 
+//polizas tipo otro
+router.get('/otro', polizasApiController.listOther)
+
+//polizas tipo otro por cliente
+router.post('/otro/porCliente', polizasApiController.listForClientsOther)
+
+//polizas tipo otro por empresa
+router.post('/otro/porEmpresa', polizasApiController.listForCompanyOther)
+
 module.exports = router;

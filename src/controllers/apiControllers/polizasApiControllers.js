@@ -290,7 +290,81 @@ const controller = {
             return res.status(200).json(info)
         })
         .catch(error => {console.log(error)});
-    }
+    },
+
+    listOther: (req, res) => {
+        Polizas.findAll({
+            where: {
+                tipo_poliza_id: {
+                    [Op.not]: [1,2,3,4]
+                    }
+            },
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'tipos_polizas'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/otro'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listForClientsOther: (req, res) => {
+        Polizas.findAll({
+            where: {
+                cliente_persona_id: req.body.id_client, 
+                tipo_poliza_id: {
+                    [Op.not]: [1,2,3,4]
+                }
+            },
+            include: [{association: 'clientes_personas_poliza'}, {association: 'tipos_polizas'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/otro/porCliente'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    listForCompanyOther: (req, res) => {
+        Polizas.findAll({
+            where: {
+                cliente_empresa_id: req.body.id_client, 
+                tipo_poliza_id: {
+                    [Op.not]: [1,2,3,4]
+                }
+            },
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'tipos_polizas'}]
+        })
+        .then(polizas => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: polizas.length,
+                    url: '/api/polizas/otro/porEmpresa'
+                },
+                data: polizas
+            }
+
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
 
 };
 
