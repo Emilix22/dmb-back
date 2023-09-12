@@ -5,6 +5,7 @@ const { Op } = require("sequelize");
 //Otra forma de llamar a los modelos
 const Siniestros_hogar = db.Siniestro_hogar;
 const Clientes_personas = db.Cliente_persona;
+const Clientes_empresas = db.Cliente_empresa;
 
 const controller = {    
 
@@ -60,17 +61,32 @@ const controller = {
         }
 
 /*******************************cliente persona o empresa****************************** */
+        let cliente;
         let clientPeapol;
         let clientCompany;
 
         if(req.body.id_client) {
             clientPeapol = req.body.id_client
+            Clientes_personas.findOne({
+                where: {id_cliente_persona: req.body.id_peapol},
+            })
+            .then(client => {
+                
+                cliente = client
+            })
         } else {
             clientPeapol = null
         }
 
         if(req.body.id_company) {
             clientCompany = req.body.id_company
+            Clientes_empresas.findOne({
+                where: {id_cliente_empresa: req.body.id_company},
+            })
+            .then(client => {
+                
+                cliente = client
+            })
         } else {
             clientCompany = null
         }
@@ -103,6 +119,38 @@ const controller = {
              
         })
         .then(siniestro_hogar => {
+            //enviar email
+            transporter.sendMail({
+                from: 'DMB Consultores torresdragon@hotmail.com',
+                to: [cliente.email, 'emideborregos@gmail.com'],
+                subject: 'Confirmación Denuncia de siniestro',
+                html: `<!DOCTYPE html>
+                        <html>
+                            <head>
+                                
+                            </head>
+                            <body>
+                                <p>Hola ${cliente.nombre ? cliente.nombre+" DNI: "+cliente.dni : cliente.nombre_empresa+" CUIT: "+cliente.cuit}, este es un resumen de la denuncia realizada en nuestro sitio web.</p>
+                                <div>
+                                    <label>Fecha del Siniestro: </label>
+                                    <span>${req.body.date}</span>
+                                </div>
+                                <div>
+                                    <label>Hora del Siniestro: </label>
+                                    <span>${req.body.hour + ":" + req.body.minutes}</span>
+                                </div>
+                                <div>
+                                    <label>Descripción de los hechos: </label>
+                                    <p>${req.body.descripcion_hechos}</p>
+                                </div>
+                            </body>
+                            <footer>
+                                
+                            </footer>
+                        </html>`,
+            });
+            
+            // envia respuesta al front
             let info = {
                 meta: {
                     status : 200,

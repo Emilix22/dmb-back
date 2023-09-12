@@ -86,6 +86,11 @@ module.exports = (sequelize, dataTypes) => {
             as: 'ubicaciones_riesgos'
         }),
 
+        Poliza.belongsTo(models.Embarcacion,{
+            foreignKey: 'embarcacion_id',
+            as: 'embarcaciones'
+        }),
+
         Poliza.belongsTo(models.Aseguradora,{
             foreignKey: 'aseguradora_id',
             as: 'aseguradoras'
