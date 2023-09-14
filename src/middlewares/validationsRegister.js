@@ -3,7 +3,7 @@ const { body } = require('express-validator');
 
 const validationsRegister = [
 
-    body('nombre').notEmpty().withMessage('El campo Nombre es obligatorio'),
+    body('date').notEmpty().withMessage('El campo Fecha es obligatorio'),
     
     body('apellido').notEmpty().withMessage('El campo Apellido es obligatorio'),
 
