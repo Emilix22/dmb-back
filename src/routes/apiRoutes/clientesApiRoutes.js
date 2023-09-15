@@ -14,16 +14,16 @@ router.get('/', clientesApiController.list);
 router.get('/empresas', clientesApiController.listEmpresas);
 
 //Buscar un cliente_persona por DNI
-router.post('/:dni', clientesApiController.findDNI)
+router.post('/dni', clientesApiController.findDNI)
 
 //Buscar un cliente_empresa por CUIT
-router.post('/:cuit', clientesApiController.findCUIT)
+router.post('/cuit', clientesApiController.findCUIT)
 
 //Buscar un cliente_persona por Id
-router.post('/:id', clientesApiController.findId)
+router.post('/id', clientesApiController.findId)
 
 //Buscar un cliente_empresa por Id
-router.post('/:empresa_id', clientesApiController.findEmpresaId)
+router.post('/empresa_id', clientesApiController.findEmpresaId)
 
 //crear cliente_persona
 //router.post('/crear', [validationsRegister], clientesApiController.create);
