@@ -7,17 +7,26 @@ const validationImage = require ('../../middlewares/validationImage')
 
 const clientesApiController = require('../../controllers/apiControllers/clientesApiControllers');
 
-//Todos los clientes personas
+//Todos los clientes_personas
 router.get('/', clientesApiController.list);
 
-//Buscar un cliente por DNI
-router.post('/dni', clientesApiController.findDNI)
+//Todos los clientes_empresas
+router.get('/empresas', clientesApiController.listEmpresas);
 
-//Buscar un cliente por Id
-router.post('/id', clientesApiController.findId)
+//Buscar un cliente_persona por DNI
+router.post('/:dni', clientesApiController.findDNI)
 
-//Buscar un cliente por CUIT
-router.post('/cuit', clientesApiController.findCUIT)
+//Buscar un cliente_empresa por CUIT
+router.post('/:cuit', clientesApiController.findCUIT)
+
+//Buscar un cliente_persona por Id
+router.post('/:id', clientesApiController.findId)
+
+//Buscar un cliente_empresa por Id
+router.post('/:empresa_id', clientesApiController.findEmpresaId)
+
+//crear cliente_persona
+//router.post('/crear', [validationsRegister], clientesApiController.create);
 
 
 // //Listar usuarios eliminados
@@ -25,8 +34,7 @@ router.post('/cuit', clientesApiController.findCUIT)
 // //Recuperar usuario eliminado
 // router.post('/restore/:id/', usersApiController.restore);
 
-//crear cliente persona
-//router.post('/personas/crear', [validationsRegister], usersApiController.create);
+
 
 // //editar usuario
 // router.put('/update/:id/', upload.single('image'), usersApiController.update);

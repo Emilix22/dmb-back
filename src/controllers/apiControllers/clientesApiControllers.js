@@ -29,6 +29,25 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
+    listEmpresas: (req, res) => {
+        Clientes_empresas.findAll({include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]})
+        .then(clientes => {
+            let lastuserIndex = clientes[clientes.length - 1]
+            let lastUser = clientes.find(user => user.id == lastuserIndex.id)
+            let info = {
+                meta: {
+                    status : 200,
+                    total: clientes.length,
+                    last: lastUser,
+                    url: '/api/clientes/empresas'
+                },
+                data: clientes
+            }
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)});
+    },
+
     findDNI: (req, res) => {
         Clientes_personas.findOne({
             where: {dni: req.body.dni},
@@ -50,52 +69,137 @@ const controller = {
             }    
         })
         .catch(error => {console.log(error)});
-        },
+    },
 
-        findId: (req, res) => {
+    findCUIT: (req, res) => {
+        Clientes_empresas.findOne({
+            where: {cuit: req.body.cuit},
+        })
+        .then(client => {
+
+            if (client) {
+                let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/clientes/cuit'
+                },
+                data: client 
+            };
+            return res.status(200).json(info);
+            } else {
+                return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun cliente con ese N° de CUIT'})
+            }    
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    findId: (req, res) => {
+        Clientes_personas.findOne({
+            where: {id_cliente_persona: req.body.id},
+            include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]
+        })
+        .then(client => {
+
+            if (client) {
+                let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/clientes/id'
+                },
+                data: client 
+            };
+            return res.status(200).json(info);
+            } else {
+                return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun cliente con ese N° de identificación'})
+            }    
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    findEmpresaId: (req, res) => {
+        Clientes_empresas.findOne({
+            where: {id_cliente_empresa: req.body.empresa_id},
+            include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]
+        })
+        .then(client => {
+
+            if (client) {
+                let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/clientes/empresa_id'
+                },
+                data: client 
+            };
+            return res.status(200).json(info);
+            } else {
+                return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun cliente con ese N° de identificación'})
+            }    
+        })
+        .catch(error => {console.log(error)});
+    },
+
+    create: (req, res) => {
+        
+        const errors = validationResult(req);
+        
+        if(errors.errors.length > 0){
+
+            return res.status(401).json({error: errors.mapped()});
+            
+        }else{
+
             Clientes_personas.findOne({
-                where: {id_cliente_persona: req.body.id},
-                include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]
+                where: {dni: req.body.dni}
             })
-            .then(client => {
-    
-                if (client) {
-                    let info = {
-                    meta: {
-                        status : 200,
-                        url: '/api/clientes/id'
-                    },
-                    data: client 
-                };
-                return res.status(200).json(info);
-                } else {
-                    return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun cliente con ese N° de identificación'})
-                }    
-            })
-            .catch(error => {console.log(error)});
-            },
+            .then(userInDB => {
+                if(userInDB){
+                return res.status(401).json({error: 'Ya existe un cliente registrado con este N° de DNI'});
+                }
 
-        findCUIT: (req, res) => {
-            Clientes_empresas.findOne({
-                where: {cuit: req.body.cuit},
-            })
-            .then(client => {
-    
-                if (client) {
+                // let img;
+
+                // if(req.file != undefined){
+                //     img = req.file.filename
+                // } else {
+                //     img = 'Foto-perfil-generica.png'
+                // }
+
+                Clientes_personas.create({
+                    nombre: req.body.nombre,
+                    apellido: req.body.apellido,
+                    email: req.body.email,
+                    celular: req.body.celular,
+                    // tarjeta_circula: img,
+                    telefono_fijo: req.body.telefono_fijo,
+                    calle: req.body.calle,
+                    altura: req.body.altura,
+                    piso: req.body.piso,
+                    departamento: req.body.departamento,
+                    cp: req.body.cp,
+                    localidad: req.body.localidad,
+                    provincia: req.body.provincia,
+                    metodo_pago_id: req.body.metodo_pago_id,
+                    vendedor_id: req.body.vendedor_id
+
+                })
+                .then(cliente => {
+
                     let info = {
-                    meta: {
-                        status : 200,
-                        url: '/api/clientes/cuit'
-                    },
-                    data: client 
-                };
-                return res.status(200).json(info);
-                } else {
-                    return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun cliente con ese N° de CUIT'})
-                }    
+                        meta: {
+                            status : 200,
+                            url: '/api/clientes/crear'
+                        },
+                        data: cliente
+                    }
+                    return res.status(200).json(info)
+                })
             })
             .catch(error => {console.log(error)});
-            },
+        }
+ 	},
+
+
     
 /************************************************************************************************************** */                          
     login: (req, res) => {
@@ -169,56 +273,6 @@ const controller = {
         })
         .catch(error => {console.log(error)})
     },
-
-    create: (req, res) => {
-        
-        const errors = validationResult(req);
-        
-        if(errors.errors.length > 0){
-
-            return res.status(401).json({error: errors.mapped()});
-            
-        }else{
-
-            Users.findOne({
-                where: {email: req.body.email}
-            })
-            .then(userInDB => {
-                if(userInDB){
-                return res.status(401).json({error: 'Ya existe un usuario registrado con este email'});
-                }
-
-                let img;
-
-                if(req.file != undefined){
-                    img = req.file.filename
-                } else {
-                    img = 'Foto-perfil-generica.png'
-                }
-
-                Users.create({
-                    name: req.body.name,
-                    surname: req.body.surname,
-                    email: req.body.email,
-                    password: bcrypt.hashSync(req.body.password, 10),
-                    image: img,
-                    level_id: 2
-                })
-                .then(user => {
-
-                    let info = {
-                        meta: {
-                            status : 200,
-                            url: '/api/users/create'
-                        },
-                        data: user.name
-                    }
-                    return res.status(200).json(info)
-                })
-            })
-            .catch(error => {console.log(error)});
-        }
- 	},
 
     update: (req, res) => {
         let userToEdit  = Users.findByPk(req.params.id);
