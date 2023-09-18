@@ -1,7 +1,6 @@
 const db = require('../../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
-const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 
 //Otra forma de llamar a los modelos
@@ -30,7 +29,7 @@ const controller = {
     },
 
     listEmpresas: (req, res) => {
-        Clientes_empresas.findAll({include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]})
+        Clientes_empresas.findAll({include: [{association: 'vendedores_cliente_empresa'}, {association: 'metodos_pagos_cliente_empresa'}]})
         .then(clientes => {
             let lastuserIndex = clientes[clientes.length - 1]
             let lastUser = clientes.find(user => user.id == lastuserIndex.id)
@@ -119,7 +118,7 @@ const controller = {
     findEmpresaId: (req, res) => {
         Clientes_empresas.findOne({
             where: {id_cliente_empresa: req.body.empresa_id},
-            include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]
+            include: [{association: 'vendedores_cliente_empresa'}, {association: 'metodos_pagos_cliente_empresa'}]
         })
         .then(client => {
 
@@ -168,6 +167,7 @@ const controller = {
                 Clientes_personas.create({
                     nombre: req.body.nombre,
                     apellido: req.body.apellido,
+                    dni: req.body.dni,
                     email: req.body.email,
                     celular: req.body.celular,
                     // tarjeta_circula: img,
@@ -199,11 +199,8 @@ const controller = {
         }
  	},
 
-
-    
-/************************************************************************************************************** */                          
-    login: (req, res) => {
-
+     createEmpresa: (req, res) => {
+        
         const errors = validationResult(req);
         
         if(errors.errors.length > 0){
@@ -211,104 +208,143 @@ const controller = {
             return res.status(401).json({error: errors.mapped()});
             
         }else{
-          
-            Users.findOne({
-                where: {email: req.body.email},
-                include: [{association: 'level'}]
+
+            Clientes_empresas.findOne({
+                where: {cuit: req.body.cuit}
             })
-            .then(userToLogin => {
-                if(userToLogin && bcrypt.compareSync(req.body.password, userToLogin.password)) { 
-                    
-                    return res.status(200).json({
-                        name: userToLogin.name,
-                        surname: userToLogin.surname,
-                        email: userToLogin.email,
-                        image: userToLogin.image,
-                        level: userToLogin.level.level
-                    })
-                }else {
-                    return res.status(401).json({error: 'Email o password inválido'})
+            .then(userInDB => {
+                if(userInDB){
+                return res.status(401).json({error: 'Ya existe un cliente registrado con este N° de CUIT'});
                 }
+
+                // let img;
+
+                // if(req.file != undefined){
+                //     img = req.file.filename
+                // } else {
+                //     img = 'Foto-perfil-generica.png'
+                // }
+
+                Clientes_empresas.create({
+                    nombre_empresa: req.body.nombre_empresa,
+                    cuit: req.body.cuit,
+                    nombre_contacto: req.body.nombre_contacto,
+                    dni_contacto: req.body.dni_contacto,
+                    email: req.body.email,
+                    celular: req.body.celular,
+                    // tarjeta_circula: img,
+                    telefono_fijo: req.body.telefono_fijo,
+                    calle: req.body.calle,
+                    altura: req.body.altura,
+                    piso: req.body.piso,
+                    departamento: req.body.departamento,
+                    cp: req.body.cp,
+                    localidad: req.body.localidad,
+                    provincia: req.body.provincia,
+                    metodo_pago_id: req.body.metodo_pago_id,
+                    vendedor_id: req.body.vendedor_id
+
+                })
+                .then(cliente => {
+
+                    let info = {
+                        meta: {
+                            status : 200,
+                            url: '/api/clientes/empresa_crear'
+                        },
+                        data: cliente
+                    }
+                    return res.status(200).json(info)
+                })
             })
             .catch(error => {console.log(error)});
-        } 
-    },
+        }
+ 	},
 
-    removed: (req, res) => {
-        Users.findAll({
-            where: {
-                deletedAt: {
-                    [Op.not]: null
-                  }
-                },
-            paranoid: false      
+     profile: (req, res) => {
+        Clientes_personas.findOne({
+            where: {id_cliente_persona: req.params.id},
+            include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]
         })
-        .then(users => {
+        .then(cliente => {
             let info = {
                 meta: {
                     status : 200,
-                    total: users.length,
-                    url: '/api/users/removed'
+                    url: '/api/clientes/perfil/:id/'
                 },
-                data: users
+                data: cliente
             }
             return res.status(200).json(info)
         })
-        .catch(error => {console.log(error)})
+        .catch(error => {console.log(error)});
     },
 
-    restore: (req, res) => {
-        Users.restore({
-            where: {id: req.params.id}    
+    profileEmpresa: (req, res) => {
+        Clientes_empresas.findOne({
+            where: {id_cliente_empresa: req.params.id},
+            include: [{association: 'vendedores_cliente_empresa'}, {association: 'metodos_pagos_cliente_empresa'}]
         })
-        .then(user => {
+        .then(cliente => {
             let info = {
                 meta: {
                     status : 200,
-                    url: '/api/users/restore/:id/'
+                    url: '/api/clientes/empresa_perfil/:id/'
                 },
-                data: user
+                data: cliente
             }
-            return res.status(200).json(info);
+            return res.status(200).json(info)
         })
-        .catch(error => {console.log(error)})
+        .catch(error => {console.log(error)});
     },
 
     update: (req, res) => {
-        let userToEdit  = Users.findByPk(req.params.id);
+        // let clienteAeditar  = Clientes_personas.findOne({
+        //     where: {dni: req.body.dni}
+        // });
 
-        let img;
+        // let img;
 
-		if(req.file != undefined){
-			img = req.file.filename
-		} else {
-			img = userToEdit.image
-		}
+		// if(req.file != undefined){
+		// 	img = req.file.filename
+		// } else {
+		// 	img = clienteAeditar.image
+		// }
 
-        Users.update(
+        Clientes_personas.update(
             {
-                name: req.body.name,
-                surname: req.body.surname,
+                nombre: req.body.nombre,
+                apellido: req.body.apellido,
+                dni: req.body.dni,
                 email: req.body.email,
-                image: img
+                celular: req.body.celular,
+                // tarjeta_circula: img
+                telefono_fijo: req.body.telefono_fijo,
+                calle: req.body.calle,
+                altura: req.body.altura,
+                piso: req.body.piso,
+                departamento: req.body.departamento,
+                cp: req.body.cp,
+                localidad: req.body.localidad,
+                provincia: req.body.provincia,
+                metodo_pago_id: req.body.metodo_pago_id,
+                vendedor_id: req.body.vendedor_id
             },
             {
-                where: {id: req.params.id},
+                where: {id_cliente_persona: req.params.id},
             }
         )
-        .then(result => {
-            Users.findOne({
-                where: {id: req.params.id},
-                include: [{association: 'level'}],
-                attributes: { exclude: ['password'] }
+        .then(resultado => {
+            Clientes_personas.findOne({
+                where: {id_cliente_persona: req.params.id},
+                include: [{association: 'vendedores_cliente_persona'}, {association: 'metodos_pagos_cliente_persona'}]
             })
-            .then(userEdited => {
+            .then(clienteEditado => {
                 let info = {
                     meta: {
                         status : 200,
-                        url: '/api/users/update/:id/'
+                        url: '/api/clientes/editar/:id'
                     },
-                    data: userEdited
+                    data: clienteEditado
                 }
                 return res.status(200).json(info)
             })
@@ -317,52 +353,161 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    profile: (req, res) => {
-        Users.findByPk(req.params.id, {attributes: { exclude: ['password'] }})
-        .then(user => {
-            let info = {
-                meta: {
-                    status : 200,
-                    url: '/api/users/profile/:id/'
-                },
-                data: user
-            }
-            return res.status(200).json(info)
-        })
-        .catch(error => {console.log(error)});
-    },
+    updateEmpresa: (req, res) => {
+        // let clienteAeditar  = Clientes_personas.findOne({
+        //     where: {dni: req.body.dni}
+        // });
 
-    changeLevel: (req, res) => {
-        
-        Users.update(
+        // let img;
+
+		// if(req.file != undefined){
+		// 	img = req.file.filename
+		// } else {
+		// 	img = clienteAeditar.image
+		// }
+
+        Clientes_empresas.update(
             {
-                level_id: req.body.level,
+                nombre_empresa: req.body.nombre_empresa,
+                cuit: req.body.cuit,
+                nombre_contacto: req.body.nombre_contacto,
+                dni_contacto: req.body.dni_contacto,
+                email: req.body.email,
+                celular: req.body.celular,
+                // tarjeta_circula: img,
+                telefono_fijo: req.body.telefono_fijo,
+                calle: req.body.calle,
+                altura: req.body.altura,
+                piso: req.body.piso,
+                departamento: req.body.departamento,
+                cp: req.body.cp,
+                localidad: req.body.localidad,
+                provincia: req.body.provincia,
+                metodo_pago_id: req.body.metodo_pago_id,
+                vendedor_id: req.body.vendedor_id
             },
             {
-                where: {id: req.params.id},
-                // include: [{association: 'level'}]
+                where: {id_cliente_empresa: req.params.id},
             }
         )
-        .then(user => {
-
-            return res.status(200).json({message: 'Permisos modificados con éxito'})
+        .then(resultado => {
+            Clientes_empresas.findOne({
+                where: {id_cliente_empresa: req.params.id},
+                include: [{association: 'vendedores_cliente_empresa'}, {association: 'metodos_pagos_cliente_empresa'}]
+            })
+            .then(clienteEditado => {
+                let info = {
+                    meta: {
+                        status : 200,
+                        url: '/api/clientes/empresa_editar/:id'
+                    },
+                    data: clienteEditado
+                }
+                return res.status(200).json(info)
+            })
+            
         })
         .catch(error => {console.log(error)});
     },
 
     destroy: (req, res) => {
-        Users.destroy({
-            where: {id: req.params.id}
+        Clientes_personas.destroy({
+            where: {id_cliente_persona: req.params.id}
         })
-        .then(user => {
+        .then(cliente => {
             return res.status(200).json({message: 'Usuario eliminado con éxito'})
         })
         .catch(error => {console.log(error)});    
     },
 
-    logout: (req, res) => {
-        res.clearCookie('userEmail');
-        req.session.destroy();      
+    destroyEmpresa: (req, res) => {
+        Clientes_empresas.destroy({
+            where: {id_cliente_empresa: req.params.id}
+        })
+        .then(cliente => {
+            return res.status(200).json({message: 'Usuario eliminado con éxito'})
+        })
+        .catch(error => {console.log(error)});    
+    },
+
+    removed: (req, res) => {
+        Clientes_personas.findAll({
+            where: {
+                deletedAt: {
+                    [Op.not]: null
+                  }
+                },
+            paranoid: false      
+        })
+        .then(clientes => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: clientes.length,
+                    url: '/api/clientes/eliminados'
+                },
+                data: clientes
+            }
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)})
+    },
+
+    removedEmpresa: (req, res) => {
+        Clientes_empresas.findAll({
+            where: {
+                deletedAt: {
+                    [Op.not]: null
+                  }
+                },
+            paranoid: false      
+        })
+        .then(clientes => {
+            let info = {
+                meta: {
+                    status : 200,
+                    total: clientes.length,
+                    url: '/api/clientes/empresa_eliminados'
+                },
+                data: clientes
+            }
+            return res.status(200).json(info)
+        })
+        .catch(error => {console.log(error)})
+    },
+
+    restore: (req, res) => {
+        Clientes_personas.restore({
+            where: {id_cliente_persona: req.params.id}    
+        })
+        .then(cliente => {
+            let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/clientes/recuperar/:id/'
+                },
+                data: cliente
+            }
+            return res.status(200).json(info);
+        })
+        .catch(error => {console.log(error)})
+    },
+
+    restoreEmpresa: (req, res) => {
+        Clientes_empresas.restore({
+            where: {id_cliente_empresa: req.params.id}    
+        })
+        .then(cliente => {
+            let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/clientes/empresa_recuperar/:id/'
+                },
+                data: cliente
+            }
+            return res.status(200).json(info);
+        })
+        .catch(error => {console.log(error)})
     }
 
 }

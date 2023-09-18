@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../../middlewares/multerUsers');
-const validationsLogin = require('../../middlewares/validationsLogin');
-const validationsRegister = require('../../middlewares/validationsRegister')
-const validationImage = require ('../../middlewares/validationImage')
+//const upload = require('../../middlewares/multerUsers');
+//const validationsRegister = require('../../middlewares/validationsRegister')
+//const validationImage = require ('../../middlewares/validationImage')
 
 const clientesApiController = require('../../controllers/apiControllers/clientesApiControllers');
 
@@ -25,32 +24,42 @@ router.post('/id', clientesApiController.findId)
 //Buscar un cliente_empresa por Id
 router.post('/empresa_id', clientesApiController.findEmpresaId)
 
-//crear cliente_persona
-//router.post('/crear', [validationsRegister], clientesApiController.create);
+//Crear cliente_persona
+router.post('/crear', clientesApiController.create);
 
+//Crear cliente_empresa
+router.post('/empresa_crear', clientesApiController.createEmpresa);
 
-// //Listar usuarios eliminados
-// router.get('/removed', usersApiController.removed);
-// //Recuperar usuario eliminado
-// router.post('/restore/:id/', usersApiController.restore);
+//Perfil de cliente_persona
+router.get('/perfil/:id', clientesApiController.profile);
 
+//Perfil de cliente_empresa
+router.get('/empresa_perfil/:id', clientesApiController.profileEmpresa);
 
+//editar cliente_persona
+router.put('/editar/:id', clientesApiController.update);
 
-// //editar usuario
-// router.put('/update/:id/', upload.single('image'), usersApiController.update);
+//editar cliente_empresa
+router.put('/empresa_editar/:id', clientesApiController.updateEmpresa);
 
-// //Perfil de usuario
-// router.get('/profile/:id', usersApiController.profile);
-
-// //Modificar permisos de usuario
-// // router.get('/level/:id/', adminMiddleware, usersController.level);
-// router.put('/level/:id/', usersApiController.changeLevel);
-
-// //Eliminar usuario
+//Eliminar cliente_persona
 // // router.get('/delete/:id/', usersController.confirmDelete)
-// router.delete('/delete/:id/', usersApiController.destroy);
+router.delete('/eliminar/:id/', clientesApiController.destroy);
 
-// //Cerrar sesión
-// router.get('/logout', usersApiController.logout);
+//Eliminar cliente_empresa
+// // router.get('/delete/:id/', usersController.confirmDelete)
+router.delete('/empresa_eliminar/:id/', clientesApiController.destroyEmpresa);
+
+//Listar cliente_persona eliminados
+router.get('/eliminados', clientesApiController.removed);
+
+//Listar cliente_empresa eliminados
+router.get('/empresa_eliminados', clientesApiController.removedEmpresa);
+
+//Recuperar cliente_persona eliminado
+router.post('/recuperar/:id/', clientesApiController.restore);
+
+//Recuperar cliente_empresa eliminado
+router.post('/empresa_recuperar/:id/', clientesApiController.restoreEmpresa);
 
 module.exports = router;

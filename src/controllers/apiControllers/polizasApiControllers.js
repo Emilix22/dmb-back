@@ -4,15 +4,12 @@ const { Op } = require("sequelize");
 
 //Otra forma de llamar a los modelos
 const Polizas = db.Poliza;
-const Clientes_personas = db.Cliente_persona;
 
-const controller = {
-
-/*****************************************************clientes_personas************************************ */    
+const controller = {    
 
     list: (req, res) => {
         Polizas.findAll({
-            include: [{association: 'tipos_polizas'}, {association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'autos'}]
+            include: [{association: 'tipos_polizas'}, {association: 'clientes_personas_poliza'}, {association: 'autos'}, {association: 'motos'}, {association: 'ubicaciones_riesgos'}, {association: 'embarcaciones'}, {association: 'aseguradoras'}, {association: 'clientes_empresas_poliza'}]
         })
         .then(polizas => {
             let info = {
@@ -32,7 +29,7 @@ const controller = {
     findId: (req, res) => {
         Polizas.findAll({
             where: {cliente_persona_id: req.body.id},
-            include: [{association: 'tipos_polizas'}, {association: 'clientes_personas_poliza'}, {association: 'autos'}, {association: 'motos'}, {association: 'ubicaciones_riesgos'}, {association: 'aseguradoras'}]
+            include: [{association: 'tipos_polizas'}, {association: 'clientes_personas_poliza'}, {association: 'autos'}, {association: 'motos'}, {association: 'ubicaciones_riesgos'}, {association: 'embarcaciones'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
 
@@ -52,10 +49,33 @@ const controller = {
         .catch(error => {console.log(error)});
         },
 
-    listCar: (req, res) => {
+        findEmpresaId: (req, res) => {
+            Polizas.findAll({
+                where: {cliente_empresa_id: req.body.id},
+                include: [{association: 'tipos_polizas'}, {association: 'clientes_empresas_poliza'}, {association: 'autos'}, {association: 'motos'}, {association: 'ubicaciones_riesgos'}, {association: 'embarcaciones'}, {association: 'aseguradoras'}]
+            })
+            .then(polizas => {
+    
+                if (polizas) {
+                    let info = {
+                    meta: {
+                        status : 200,
+                        url: '/api/polizas/empresaid'
+                    },
+                    data: polizas 
+                };
+                return res.status(200).json(info);
+                } else {
+                    return res.status(401).json({error: 'Lo sentimos, no existen en nuestros registros pólizas para el cliente seleccionado'})
+                }    
+            })
+            .catch(error => {console.log(error)});
+            },
+
+    listAuto: (req, res) => {
         Polizas.findAll({
             where: {tipo_poliza_id: 1},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'autos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'autos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -72,10 +92,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForClientsCar: (req, res) => {
+    listAutoPorCliente: (req, res) => {
         Polizas.findAll({
             where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 1},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'autos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'autos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -92,10 +112,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForCompanyCar: (req, res) => {
+    listAutoPorEmpresa: (req, res) => {
         Polizas.findAll({
             where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 1},
-            include: [{association: 'clientes_empresas_poliza'}, {association: 'autos'}]
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'autos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -115,7 +135,7 @@ const controller = {
     listMoto: (req, res) => {
         Polizas.findAll({
             where: {tipo_poliza_id: 2},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'motos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'motos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -132,10 +152,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForClientsMoto: (req, res) => {
+    listMotoPorCliente: (req, res) => {
         Polizas.findAll({
             where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 2},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'motos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'motos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -152,10 +172,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForCompanyMoto: (req, res) => {
+    listMotoPorEmpresa: (req, res) => {
         Polizas.findAll({
             where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 2},
-            include: [{association: 'clientes_empresas_poliza'}, {association: 'motos'}]
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'motos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -172,10 +192,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listHome: (req, res) => {
+    listHogar: (req, res) => {
         Polizas.findAll({
             where: {tipo_poliza_id: 3},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -192,10 +212,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForClientsHome: (req, res) => {
+    listHogarPorCliente: (req, res) => {
         Polizas.findAll({
             where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 3},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'ubicaciones_riesgos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'ubicaciones_riesgos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -212,10 +232,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForCompanyHome: (req, res) => {
+    listHogarPorEmpresa: (req, res) => {
         Polizas.findAll({
             where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 3},
-            include: [{association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -232,10 +252,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listConsortium: (req, res) => {
+    listConsorcio: (req, res) => {
         Polizas.findAll({
             where: {tipo_poliza_id: 4},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -252,10 +272,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForClientsConsortium: (req, res) => {
+    listConsorcioPorCliente: (req, res) => {
         Polizas.findAll({
             where: {cliente_persona_id: req.body.id_client, tipo_poliza_id: 4},
-            include: [{association: 'clientes_personas_poliza'}, {association: 'ubicaciones_riesgos'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'ubicaciones_riesgos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -272,10 +292,10 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForCompanyConsortium: (req, res) => {
+    listConsorcioPorEmpresa: (req, res) => {
         Polizas.findAll({
             where: {cliente_empresa_id: req.body.id_client, tipo_poliza_id: 4},
-            include: [{association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}]
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'ubicaciones_riesgos'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -292,14 +312,14 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listOther: (req, res) => {
+    listOtro: (req, res) => {
         Polizas.findAll({
             where: {
                 tipo_poliza_id: {
                     [Op.not]: [1,2,3,4]
                     }
             },
-            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'tipos_polizas'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'clientes_empresas_poliza'}, {association: 'tipos_polizas'}, {association: 'ubicaciones_riesgos'}, {association: 'embarcaciones'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -316,7 +336,7 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForClientsOther: (req, res) => {
+    listOtroPorCliente: (req, res) => {
         Polizas.findAll({
             where: {
                 cliente_persona_id: req.body.id_client, 
@@ -324,7 +344,7 @@ const controller = {
                     [Op.not]: [1,2,3,4]
                 }
             },
-            include: [{association: 'clientes_personas_poliza'}, {association: 'tipos_polizas'}]
+            include: [{association: 'clientes_personas_poliza'}, {association: 'tipos_polizas'}, {association: 'ubicaciones_riesgos'}, {association: 'embarcaciones'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {
@@ -341,7 +361,7 @@ const controller = {
         .catch(error => {console.log(error)});
     },
 
-    listForCompanyOther: (req, res) => {
+    listOtroPorEmpresa: (req, res) => {
         Polizas.findAll({
             where: {
                 cliente_empresa_id: req.body.id_client, 
@@ -349,7 +369,7 @@ const controller = {
                     [Op.not]: [1,2,3,4]
                 }
             },
-            include: [{association: 'clientes_empresas_poliza'}, {association: 'tipos_polizas'}]
+            include: [{association: 'clientes_empresas_poliza'}, {association: 'tipos_polizas'}, {association: 'ubicaciones_riesgos'}, {association: 'embarcaciones'}, {association: 'aseguradoras'}]
         })
         .then(polizas => {
             let info = {

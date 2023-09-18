@@ -3,56 +3,58 @@ const router = express.Router();
 
 const polizasApiController = require('../../controllers/apiControllers/polizasApiControllers');
 
-/******************************************************clientes_personas************************** */
-//Todas las pólizas
+//Buscar todas las pólizas
 router.get('/', polizasApiController.list);
 
 //Buscar polizas por cliente Id
 router.post('/:id', polizasApiController.findId)
 
-//polizas tipo auto
-router.get('/auto', polizasApiController.listCar)
+//Buscar polizas por clienteEmpresa Id
+router.post('/:empresaid', polizasApiController.findEmpresaId)
+ 
+//Buscar polizas tipo auto
+router.get('/auto', polizasApiController.listAuto)
 
-//polizas tipo auto por cliente
-router.post('/auto/porCliente', polizasApiController.listForClientsCar)
+//Buscar polizas tipo auto por cliente
+router.post('/auto/porCliente', polizasApiController.listAutoPorCliente)
 
-//polizas tipo auto por empresa
-router.post('/auto/porEmpresa', polizasApiController.listForCompanyCar)
+//Buscar polizas tipo auto por empresa
+router.post('/auto/porEmpresa', polizasApiController.listAutoPorEmpresa)
 
-//polizas tipo moto
+//Buscar polizas tipo moto
 router.get('/moto', polizasApiController.listMoto)
 
-//polizas tipo moto por cliente
-router.post('/moto/porCliente', polizasApiController.listForClientsMoto)
+//Buscar polizas tipo moto por cliente
+router.post('/moto/porCliente', polizasApiController.listMotoPorCliente)
 
-//polizas tipo moto por empresa
-router.post('/moto/porEmpresa', polizasApiController.listForCompanyMoto)
+//Buscar polizas tipo moto por empresa
+router.post('/moto/porEmpresa', polizasApiController.listMotoPorEmpresa)
 
-//polizas tipo hogar
-router.get('/hogar', polizasApiController.listHome)
+//Buscar polizas tipo hogar
+router.get('/hogar', polizasApiController.listHogar)
 
-//polizas tipo hogar por cliente
-router.post('/hogar/porCliente', polizasApiController.listForClientsHome)
+//Buscar polizas tipo hogar por cliente
+router.post('/hogar/porCliente', polizasApiController.listHogarPorCliente)
 
-//polizas tipo hogar por empresa
-router.post('/hogar/porEmpresa', polizasApiController.listForCompanyHome)
+//Buscar polizas tipo hogar por empresa
+router.post('/hogar/porEmpresa', polizasApiController.listHogarPorEmpresa)
 
-//polizas tipo consorcio
-router.get('/consorcio', polizasApiController.listConsortium)
+//Buscar polizas tipo consorcio
+router.get('/consorcio', polizasApiController.listConsorcio)
 
-//polizas tipo consorcio por cliente
-router.post('/consorcio/porCliente', polizasApiController.listForClientsConsortium)
+//Buscar polizas tipo consorcio por cliente
+router.post('/consorcio/porCliente', polizasApiController.listConsorcioPorCliente)
 
-//polizas tipo consorcio por empresa
-router.post('/consorcio/porEmpresa', polizasApiController.listForCompanyConsortium)
+//Buscar polizas tipo consorcio por empresa
+router.post('/consorcio/porEmpresa', polizasApiController.listConsorcioPorEmpresa)
 
-//polizas tipo otro
-router.get('/otro', polizasApiController.listOther)
+//Buscar polizas tipo otro
+router.get('/otro', polizasApiController.listOtro)
 
-//polizas tipo otro por cliente
-router.post('/otro/porCliente', polizasApiController.listForClientsOther)
+//Buscar polizas tipo otro por cliente
+router.post('/otro/porCliente', polizasApiController.listOtroPorCliente)
 
-//polizas tipo otro por empresa
-router.post('/otro/porEmpresa', polizasApiController.listForCompanyOther)
+//Buscar polizas tipo otro por empresa
+router.post('/otro/porEmpresa', polizasApiController.listOtroPorEmpresa)
 
 module.exports = router;
