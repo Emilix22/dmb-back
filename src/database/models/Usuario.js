@@ -20,6 +20,12 @@ module.exports = (sequelize, dataTypes) => {
         email: {
             type: dataTypes.STRING
         },
+        password: {
+            type: dataTypes.STRING
+        },
+        imagen: {
+            type: dataTypes.STRING
+        },
         celular: {
             type: dataTypes.STRING
         },
@@ -49,9 +55,6 @@ module.exports = (sequelize, dataTypes) => {
         },
         nivel_permiso_id: {
             type: dataTypes.INTEGER
-        },
-        puesto: {
-            type: dataTypes.STRING
         },
         createdAt: {
             type: dataTypes.DATE

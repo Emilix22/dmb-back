@@ -1,11 +1,11 @@
-// const express = require('express');
-// const router = express.Router();
-// const upload = require('../../middlewares/multerUsers');
-// const validationsLogin = require('../../middlewares/validationsLogin');
-// const validationsRegister = require('../../middlewares/validationsRegister')
-// const validationImage = require ('../../middlewares/validationImage')
+const express = require('express');
+const router = express.Router();
+const upload = require('../../middlewares/multerUsers');
+const validationsLogin = require('../../middlewares/validationsLogin');
+const validationsRegister = require('../../middlewares/validationsRegister')
+const validationImage = require ('../../middlewares/validationImage')
 
-// const clientesApiController = require('../../controllers/apiControllers/clientesApiControllers');
+const usuariosApiController = require('../../controllers/apiControllers/usuariosApiControllers');
 
 // //Todos los clientes
 // router.get('/', clientesApiController.list);
@@ -13,16 +13,16 @@
 // //Buscar un cliente por DNI
 // router.post('/dni', clientesApiController.findDNI)
 
-// // //login de usuario
-// // router.post('/login', [validationsLogin], usersApiController.login);
+//login de usuario
+router.post('/login', [validationsLogin], usuariosApiController.login);
 
 // // //Listar usuarios eliminados
 // // router.get('/removed', usersApiController.removed);
 // // //Recuperar usuario eliminado
 // // router.post('/restore/:id/', usersApiController.restore);
 
-// // //crear usuario
-// // router.post('/create',  upload.single('image'), validationImage, [validationsRegister], usersApiController.create);
+//crear usuario
+router.post('/crear',  upload.single('imagen'), validationImage, [validationsRegister], usuariosApiController.create);
 
 // // //editar usuario
 // // router.put('/update/:id/', upload.single('image'), usersApiController.update);
@@ -38,7 +38,7 @@
 // // // router.get('/delete/:id/', usersController.confirmDelete)
 // // router.delete('/delete/:id/', usersApiController.destroy);
 
-// // //Cerrar sesión
-// // router.get('/logout', usersApiController.logout);
+//Cerrar sesión
+router.get('/logout', usuariosApiController.logout);
 
-// module.exports = router;
+module.exports = router;

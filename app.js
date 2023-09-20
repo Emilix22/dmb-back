@@ -13,6 +13,7 @@ const siniestros_motoApiRoutes = require('./src/routes/apiRoutes/siniestros_moto
 const siniestros_hogarApiRoutes = require('./src/routes/apiRoutes/siniestros_hogarApiRoutes');
 const siniestros_consorcioApiRoutes = require('./src/routes/apiRoutes/siniestros_consorcioApiRoutes');
 const siniestros_otroApiRoutes = require('./src/routes/apiRoutes/siniestros_otroApiRoutes');
+const usuariosApiRoutes = require('./src/routes/apiRoutes/usuariosApiRoutes')
 
 
 app.set('view engine', 'ejs');// si no va a tener vistas desinstalar
@@ -37,6 +38,7 @@ app.use('/api/siniestros_moto', siniestros_motoApiRoutes);
 app.use('/api/siniestros_hogar', siniestros_hogarApiRoutes);
 app.use('/api/siniestros_consorcio', siniestros_consorcioApiRoutes);
 app.use('/api/siniestros_otro', siniestros_otroApiRoutes);
+app.use('/api/usuarios', usuariosApiRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
