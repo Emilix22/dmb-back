@@ -31,6 +31,7 @@ const controller = {
     },
 
     create: (req, res) => {
+        // return console.log(req.body)
 
         //console.log(req.body)
         //console.log(req.files)
@@ -58,6 +59,14 @@ const controller = {
             imgRegistroFront = req.files.license_front[0].filename;
             imgRegistroBack = req.files.license_back[0].filename;
             
+            let imgRueda = null;
+            
+            if (req.files.img_rueda) {
+                imgRueda = req.files.img_rueda[0].filename; 
+            } else {
+                imgRueda = null
+            }
+
             let cliente;
             let clientPeapol;
             let clientCompany;
@@ -109,7 +118,7 @@ const controller = {
                 registro_dorso: imgRegistroBack,
                 conducia_asegurado: req.body.question1,
                 lesionados_dentro_vehiculo: req.body.question2,
-                lesionados_fuera_vehiculo: req.body.question3,
+                //lesionados_fuera_vehiculo: req.body.question3,
                 vehiculos_terceros_involucrados: req.body.question4,
                 cnc_nombre: req.body.dnc_name,
                 cnc_apellido: req.body.dnc_surname,
@@ -143,32 +152,28 @@ const controller = {
                 ldv_telefono3: req.body.iic_phone3,
                 ldv_telefono4: req.body.iic_phone4,
                 ldv_telefono5: req.body.iic_phone5,
-                lfv_cantidad: req.body.ioc_quantity,
-                lfv_nombre1: req.body.iic_name1,
-                lfv_nombre2: req.body.iic_name2,
-                lfv_nombre3: req.body.iic_name3,
-                lfv_nombre4: req.body.iic_name4,
-                lfv_nombre5: req.body.iic_name5,
-                lfv_apellido1: req.body.iic_surname1,
-                lfv_apellido2: req.body.iic_surname2,
-                lfv_apellido3: req.body.iic_surname3,
-                lfv_apellido4: req.body.iic_surname4,
-                lfv_apellido5: req.body.iic_surname5,
-                lfv_dni1: req.body.iic_dni1,
-                lfv_dni2: req.body.iic_dni2,
-                lfv_dni3: req.body.iic_dni3,
-                lfv_dni4: req.body.iic_dni4,
-                lfv_dni5: req.body.iic_dni5,
-                lfv_telefono1: req.body.iic_phone1,
-                lfv_telefono2: req.body.iic_phone2,
-                lfv_telefono3: req.body.iic_phone3,
-                lfv_telefono4: req.body.iic_phone4,
-                lfv_telefono5: req.body.iic_phone5,
-                vti_patente: req.body.oc_patent,
-                vti_aseguradora: req.body.oc_insurance,
-                vti_nombre: req.body.oc_name,
-                vti_apellido: req.body.oc_surname,
-                vti_dni: req.body.oc_dni
+                cerradura: req.body.lock,
+                cerradura_baul: req.body.lock_baul,
+                cerradura_derecha: req.body.lock_rigth,
+                cerradura_izquierda: req.body.lock_left,
+                cristales: req.body.crystals,
+                cristales_luneta: req.body.crystals_luneta,
+                cristales_parabrisas: req.body.crystals_parabrisas,
+                cristales_del_derecha: req.body.crystals_del_derecha,
+                cristales_del_izquierda: req.body.crystals_del_izquierda,
+                cristales_tras_derecha: req.body.crystals_tras_derecha,
+                cristales_tras_izquierda: req.body.crystals_tras_izquierda,
+                rueda_auxilio: req.body.rueda_auxilio,
+                rueda_del_derecha: req.body.rueda_del_derecha,
+                rueda_del_izquierda: req.body.rueda_del_izquierda,
+                rueda_tras_derecha: req.body.rueda_tras_derecha,
+                rueda_tras_izquierda: req.body.rueda_tras_izquierda,
+                img_rueda: imgRueda,
+                vehiculos_terceros_inv: req.body.vehiculos_terceros_inv,
+                //vti_aseguradora: req.body.oc_insurance//poner req.body.oc_insurance[0]+", "+req.body.oc_insurance[1]etc..
+                // vti_nombre: req.body.oc_name,
+                // vti_apellido: req.body.oc_surname,
+                // vti_dni: req.body.oc_dni
         
             })
             .then(siniestro_auto => {

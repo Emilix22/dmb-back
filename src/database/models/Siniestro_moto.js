@@ -65,9 +65,6 @@ module.exports = (sequelize, dataTypes) => {
         lesionados_dentro_vehiculo: {
             type: dataTypes.STRING
         },
-        lesionados_fuera_vehiculo: {
-            type: dataTypes.STRING
-        },
         vehiculos_terceros_involucrados: {
             type: dataTypes.STRING
         },
@@ -131,84 +128,9 @@ module.exports = (sequelize, dataTypes) => {
         ldv_telefono2: {
             type: dataTypes.STRING
         },
-        lfv_cantidad: {
+        vehiculos_terceros_inv: {
             type: dataTypes.STRING
         },
-        lfv_nombre1: {
-            type: dataTypes.STRING
-        },
-        lfv_nombre2: {
-            type: dataTypes.STRING
-        },
-        lfv_nombre3: {
-            type: dataTypes.STRING
-        },
-        lfv_nombre4: {
-            type: dataTypes.STRING
-        },
-        lfv_nombre5: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido1: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido2: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido3: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido4: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido5: {
-            type: dataTypes.STRING
-        },
-        lfv_dni1: {
-            type: dataTypes.STRING
-        },
-        lfv_dni2: {
-            type: dataTypes.STRING
-        },
-        lfv_dni3: {
-            type: dataTypes.STRING
-        },
-        lfv_dni4: {
-            type: dataTypes.STRING
-        },
-        lfv_dni5: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono1: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono2: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono3: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono4: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono5: {
-            type: dataTypes.STRING
-        },
-        vti_patente: {
-            type: dataTypes.STRING
-        },
-        vti_aseguradora: {
-            type: dataTypes.STRING
-        },
-        vti_nombre: {
-            type: dataTypes.STRING
-        },
-        vti_apellido: {
-            type: dataTypes.STRING
-        },
-        vti_dni: {
-            type: dataTypes.STRING
-        },    
         createdAt: {
             type: dataTypes.DATE
         },

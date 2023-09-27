@@ -65,9 +65,6 @@ module.exports = (sequelize, dataTypes) => {
         lesionados_dentro_vehiculo: {
             type: dataTypes.STRING
         },
-        lesionados_fuera_vehiculo: {
-            type: dataTypes.STRING
-        },
         vehiculos_terceros_involucrados: {
             type: dataTypes.STRING
         },
@@ -167,84 +164,60 @@ module.exports = (sequelize, dataTypes) => {
         ldv_telefono5: {
             type: dataTypes.STRING
         },
-        lfv_cantidad: {
+        cerradura: {
             type: dataTypes.STRING
         },
-        lfv_nombre1: {
+        cerradura_baul: {
+            type: dataTypes.BOOLEAN
+        },
+        cerradura_derecha: {
+            type: dataTypes.BOOLEAN
+        },
+        cerradura_izquierda: {
+            type: dataTypes.BOOLEAN
+        },
+        cristales: {
             type: dataTypes.STRING
         },
-        lfv_nombre2: {
+        cristales_luneta: {
+            type: dataTypes.BOOLEAN
+        },
+        cristales_parabrisas: {
+            type: dataTypes.BOOLEAN
+        },
+        cristales_del_derecha: {
+            type: dataTypes.BOOLEAN
+        },
+        cristales_del_izquierda: {
+            type: dataTypes.BOOLEAN
+        },
+        cristales_tras_derecha: {
+            type: dataTypes.BOOLEAN
+        },
+        cristales_tras_izquierda: {
+            type: dataTypes.BOOLEAN
+        },
+        rueda_auxilio: {
             type: dataTypes.STRING
         },
-        lfv_nombre3: {
+        rueda_del_derecha: {
+            type: dataTypes.BOOLEAN
+        },
+        rueda_del_izquierda: {
+            type: dataTypes.BOOLEAN
+        },
+        rueda_tras_derecha: {
+            type: dataTypes.BOOLEAN
+        },
+        rueda_tras_izquierda: {
+            type: dataTypes.BOOLEAN
+        },
+        img_rueda: {
             type: dataTypes.STRING
         },
-        lfv_nombre4: {
+        vehiculos_terceros_inv: {
             type: dataTypes.STRING
         },
-        lfv_nombre5: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido1: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido2: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido3: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido4: {
-            type: dataTypes.STRING
-        },
-        lfv_apellido5: {
-            type: dataTypes.STRING
-        },
-        lfv_dni1: {
-            type: dataTypes.STRING
-        },
-        lfv_dni2: {
-            type: dataTypes.STRING
-        },
-        lfv_dni3: {
-            type: dataTypes.STRING
-        },
-        lfv_dni4: {
-            type: dataTypes.STRING
-        },
-        lfv_dni5: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono1: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono2: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono3: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono4: {
-            type: dataTypes.STRING
-        },
-        lfv_telefono5: {
-            type: dataTypes.STRING
-        },
-        vti_patente: {
-            type: dataTypes.STRING
-        },
-        vti_aseguradora: {
-            type: dataTypes.STRING
-        },
-        vti_nombre: {
-            type: dataTypes.STRING
-        },
-        vti_apellido: {
-            type: dataTypes.STRING
-        },
-        vti_dni: {
-            type: dataTypes.STRING
-        },    
         createdAt: {
             type: dataTypes.DATE
         },
