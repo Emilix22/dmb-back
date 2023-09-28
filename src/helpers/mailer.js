@@ -2,12 +2,12 @@ const nodemailer = require('nodemailer')
 
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.office365.com",
+    host: "c1590039.ferozo.com", //c1590039.ferozo.com  || smtp.office365.com
     port: 587,
     secure: false, // upgrade later with STARTTLS
     auth: {
-      user: "torresdragon@hotmail.com",
-      pass: "vadaju20",
+      user: "siniestros@dmbconsultores.com.ar", //siniestros@dmbconsultores.com.ar  ||  torresdragon@hotmail.com
+      pass: "Europa16", //Europa16  ||  vadaju20
     },
   });
 

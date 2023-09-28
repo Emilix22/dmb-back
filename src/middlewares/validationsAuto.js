@@ -15,9 +15,9 @@ const validationsAuto = [
     body('city').notEmpty().withMessage('El campo Localidad es obligatorio'),
     body('description').notEmpty().withMessage('El campo Descripción de los hechos es obligatorio'),
     body('characteristics').notEmpty().withMessage('El campo Características del Lugar es obligatorio'),
-    body('question1').notEmpty().withMessage('El campo ¿Conducía el Asegurado? es obligatorio'),
-    body('question2').notEmpty().withMessage('El campo ¿Hubo lesionados dentro del vehículo? es obligatorio'),
-    body('question4').notEmpty().withMessage('El campo ¿Hubo vehículos de terceros involucrados? es obligatorio'),
+    // body('question1').notEmpty().withMessage('El campo ¿Conducía el Asegurado? es obligatorio'),
+    // body('question2').notEmpty().withMessage('El campo ¿Hubo lesionados dentro del vehículo? es obligatorio'),
+    // body('question4').notEmpty().withMessage('El campo ¿Hubo vehículos de terceros involucrados? es obligatorio'),
 
 ]
 
