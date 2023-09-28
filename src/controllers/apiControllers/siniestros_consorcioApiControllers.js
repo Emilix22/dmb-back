@@ -102,7 +102,7 @@ const controller = {
             .then(siniestro_consorcio => {
                 //enviar email
                 transporter.sendMail({
-                    from: 'DMB Consultores torresdragon@hotmail.com',
+                    from: 'DMB Consultores siniestros@dmbconsultores.com.ar',
                     to: [cliente.email, 'siniestros@dmbconsultores.com.ar'],
                     subject: 'Confirmación Denuncia de siniestro',
                     html: `<!DOCTYPE html>

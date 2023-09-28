@@ -180,7 +180,7 @@ const controller = {
                 //enviar email
                 transporter.sendMail({
                     from: 'DMB Consultores siniestros@dmbconsultores.com.ar',
-                    to: [cliente.email, 'emideborregos@gmail.com'],
+                    to: [cliente.email, 'siniestros@dmbconsultores.com.ar'],
                     subject: 'Confirmación Denuncia de siniestro',
                     html: `<!DOCTYPE html>
                             <html>

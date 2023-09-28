@@ -134,7 +134,7 @@ const controller = {
             .then(siniestro_moto => {
                 //enviar email
                 transporter.sendMail({
-                    from: 'DMB Consultores torresdragon@hotmail.com',
+                    from: 'DMB Consultores siniestros@dmbconsultores.com.ar',
                     to: [cliente.email, 'siniestros@dmbconsultores.com.ar'],
                     subject: 'Confirmación Denuncia de siniestro',
                     html: `<!DOCTYPE html>
@@ -154,7 +154,7 @@ const controller = {
                                     </div>
                                     <div>
                                         <label>Lugar del Siniestro: </label>
-                                        <span>${req.body.street+" "+req.body.door+" "+req.body.city+", CP: "+req.body.postalCode}</span>
+                                        <span>${req.body.street+" "+req.body.door+" "+req.body.city}</span>
                                     </div>
                                     <div>
                                         <label>Motivo: </label>
