@@ -13,8 +13,20 @@ const siniestros_motoApiRoutes = require('./src/routes/apiRoutes/siniestros_moto
 const siniestros_hogarApiRoutes = require('./src/routes/apiRoutes/siniestros_hogarApiRoutes');
 const siniestros_consorcioApiRoutes = require('./src/routes/apiRoutes/siniestros_consorcioApiRoutes');
 const siniestros_otroApiRoutes = require('./src/routes/apiRoutes/siniestros_otroApiRoutes');
-const usuariosApiRoutes = require('./src/routes/apiRoutes/usuariosApiRoutes')
+const usuariosApiRoutes = require('./src/routes/apiRoutes/usuariosApiRoutes');
 
+/****************************************** Configuración CORS ***************************************/
+const listaBlanca = ['http://localhost:5173/', 'https://meridian-impulse.000webhostapp.com/'];
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (listaBlanca.indexOf(origin != -1)) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+/*************************************************************************************************** */
 
 app.set('view engine', 'ejs');// si no va a tener vistas desinstalar
 app.use(methodOverride('_method'));
@@ -26,7 +38,7 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(cookieParser());
-app.use(cors());// hacer lista blanca de sitios
+app.use(cors(corsOptions));
 
 app.use(express.static("public"));
 
