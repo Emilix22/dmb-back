@@ -16,7 +16,7 @@ const siniestros_otroApiRoutes = require('./src/routes/apiRoutes/siniestros_otro
 const usuariosApiRoutes = require('./src/routes/apiRoutes/usuariosApiRoutes');
 
 /****************************************** Configuración CORS ***************************************/
-const listaBlanca = ['http://localhost:5173/', 'https://meridian-impulse.000webhostapp.com/', 'https://dmb-system.onrender.com/'];
+const listaBlanca = ['http://localhost:5173/', 'https://meridian-impulse.000webhostapp.com/', 'https://emilixweb.com/'];
 const corsOptions = {
     origin: (origin, callback) => {
         if (listaBlanca.indexOf(origin != -1)) {
