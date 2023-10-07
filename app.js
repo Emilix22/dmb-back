@@ -56,8 +56,8 @@ app.use('/api/usuarios', usuariosApiRoutes);
 
 const port = process.env.PORT || 3000;
 https.createServer({
-    cert: fs.readFileSync('/etc/letsencrypt/live/dmb-back.online/fullchain.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/dmb-back.online/privkey.pem')
+    cert: fs.readFileSync('fullchain.pem'),
+    key: fs.readFileSync('privkey.pem')
 }, app).listen(port, () => {
     console.log('Servidor corriendo en puerto', port);
 });
