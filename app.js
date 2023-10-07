@@ -4,6 +4,8 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const fs = require('fs');
+const https = require('https')
 
 const indexRoutes = require('./src/routes/indexRoutes');
 const polizasApiRoutes = require('./src/routes/apiRoutes/polizasApiRoutes');
@@ -53,6 +55,9 @@ app.use('/api/siniestros_otro', siniestros_otroApiRoutes);
 app.use('/api/usuarios', usuariosApiRoutes);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+https.createServer({
+    cert: fs.readFileSync('/etc/letsencrypt/live/dmb-back.online/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/dmb-back.online/privkey.pem')
+}, app).listen(port, () => {
     console.log('Servidor corriendo en puerto', port);
 });
