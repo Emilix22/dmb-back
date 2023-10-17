@@ -16,9 +16,10 @@ const siniestros_hogarApiRoutes = require('./src/routes/apiRoutes/siniestros_hog
 const siniestros_consorcioApiRoutes = require('./src/routes/apiRoutes/siniestros_consorcioApiRoutes');
 const siniestros_otroApiRoutes = require('./src/routes/apiRoutes/siniestros_otroApiRoutes');
 const usuariosApiRoutes = require('./src/routes/apiRoutes/usuariosApiRoutes');
+const metodosPagoApiRoutes = require('./src/routes/apiRoutes/metodosPagoApiRoutes');
 
 /****************************************** Configuración CORS ***************************************/
-const listaBlanca = ['http://localhost:5173/', 'https://meridian-impulse.000webhostapp.com/', 'https://emilixweb.com/'];
+const listaBlanca = ['http://localhost:5173/', 'https://dmb-clientes.onrender.com/', 'https://emilixweb.com/'];
 const corsOptions = {
     origin: (origin, callback) => {
         if (listaBlanca.indexOf(origin != -1)) {
@@ -53,6 +54,7 @@ app.use('/api/siniestros_hogar', siniestros_hogarApiRoutes);
 app.use('/api/siniestros_consorcio', siniestros_consorcioApiRoutes);
 app.use('/api/siniestros_otro', siniestros_otroApiRoutes);
 app.use('/api/usuarios', usuariosApiRoutes);
+app.use('/api/metodosPago', metodosPagoApiRoutes);
 
 const port = process.env.PORT || 3000;
 https.createServer({
