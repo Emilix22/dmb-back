@@ -56,6 +56,7 @@ app.use('/api/siniestros_otro', siniestros_otroApiRoutes);
 app.use('/api/usuarios', usuariosApiRoutes);
 app.use('/api/metodosPago', metodosPagoApiRoutes);
 
+/**************************servidor para https****************** */
 const port = process.env.PORT || 3000;
 https.createServer({
     cert: fs.readFileSync('fullchain.pem'),
@@ -63,3 +64,9 @@ https.createServer({
 }, app).listen(port, () => {
     console.log('Servidor corriendo en puerto', port);
 });
+/***************************************************************** */
+
+// const port = process.env.PORT || 3000;
+// app.listen(port, () => {
+//     console.log('Servidor corriendo en puerto', port);
+// });
