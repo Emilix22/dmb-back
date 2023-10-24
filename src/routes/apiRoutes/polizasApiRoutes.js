@@ -10,7 +10,7 @@ router.get('/', polizasApiController.list);
 router.post('/:id', polizasApiController.findId)
 
 //Buscar polizas por clienteEmpresa Id
-router.post('/:empresaid', polizasApiController.findEmpresaId)
+router.post('/empresa/:id', polizasApiController.findEmpresaId)
  
 //Buscar polizas tipo auto
 router.get('/auto', polizasApiController.listAuto)
