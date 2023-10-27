@@ -60,7 +60,7 @@ const controller = {
                     let info = {
                     meta: {
                         status : 200,
-                        url: '/api/polizas/empresaid'
+                        url: '/api/polizas/porEmpresa'
                     },
                     data: polizas 
                 };
