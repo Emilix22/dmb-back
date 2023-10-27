@@ -37,7 +37,7 @@ const controller = {
                 let info = {
                 meta: {
                     status : 200,
-                    url: '/api/polizas/id'
+                    url: '/api/polizas/porCliente'
                 },
                 data: polizas 
             };
