@@ -17,6 +17,7 @@ const siniestros_consorcioApiRoutes = require('./src/routes/apiRoutes/siniestros
 const siniestros_otroApiRoutes = require('./src/routes/apiRoutes/siniestros_otroApiRoutes');
 const usuariosApiRoutes = require('./src/routes/apiRoutes/usuariosApiRoutes');
 const metodosPagoApiRoutes = require('./src/routes/apiRoutes/metodosPagoApiRoutes');
+const reportesApiRoutes = require('./src/routes/apiRoutes/reportesApiRoutes');
 
 /****************************************** Configuración CORS ***************************************/
 const listaBlanca = ['http://localhost:5173/', 'https://dmb-clientes.onrender.com/', 'https://emilixweb.com/'];
@@ -55,6 +56,7 @@ app.use('/api/siniestros_consorcio', siniestros_consorcioApiRoutes);
 app.use('/api/siniestros_otro', siniestros_otroApiRoutes);
 app.use('/api/usuarios', usuariosApiRoutes);
 app.use('/api/metodosPago', metodosPagoApiRoutes);
+app.use('/api/reportes', reportesApiRoutes);
 
 /**************************servidor para https****************** */
 const port = process.env.PORT || 3000;

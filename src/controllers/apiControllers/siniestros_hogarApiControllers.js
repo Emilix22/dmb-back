@@ -172,7 +172,30 @@ const controller = {
             })
             .catch(error => {console.log(error)});
         }
- 	}
+ 	},
+
+    findId: (req, res) => {
+        Siniestros_hogar.findOne({
+            where: {id_siniestro_hogar: req.body.id},
+            include: [{association: 'polizas_siniestro_hogar'}, {association: 'clientes_personas_siniestro_hogar'}, {association: 'clientes_empresas_siniestro_hogar'}]
+        })
+        .then(siniestro => {
+
+            if (siniestro) {
+                let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/siniestros_hogar/id'
+                },
+                data: siniestro 
+            };
+            return res.status(200).json(info);
+            } else {
+                return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun siniestro con ese N° de identificación'})
+            }    
+        })
+        .catch(error => {console.log(error)});
+    }
 
     
 

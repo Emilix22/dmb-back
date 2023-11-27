@@ -13,4 +13,8 @@ router.get('/', siniestros_motoApiController.list);
 //guardar en base de datos nuevo siniestro_auto
 router.post('/crear', upload.fields([{name: 'license_front'}, {name: 'license_back'}, {name: 'police_complaint'}]), validationImage, [validationsAuto], siniestros_motoApiController.create)
 
+//buscar un siniestro_moto por id
+router.post('/id', siniestros_motoApiController.findId)
+
+
 module.exports = router;

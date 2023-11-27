@@ -143,9 +143,30 @@ const controller = {
             })
             .catch(error => {console.log(error)});
         }    
- 	}
+ 	},
 
-    
+    findId: (req, res) => {
+        Siniestros_consorcio.findOne({
+            where: {id_siniestro_consorcio: req.body.id},
+            include: [{association: 'polizas_siniestro_consorcio'}, {association: 'clientes_personas_siniestro_consorcio'}, {association: 'clientes_empresas_siniestro_consorcio'}]
+        })
+        .then(siniestro => {
+
+            if (siniestro) {
+                let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/siniestros_consorcio/id'
+                },
+                data: siniestro 
+            };
+            return res.status(200).json(info);
+            } else {
+                return res.status(401).json({error: 'Lo sentimos, no existe en nuestros registros ningun siniestro con ese N° de identificación'})
+            }    
+        })
+        .catch(error => {console.log(error)});
+    }
 
 };
 

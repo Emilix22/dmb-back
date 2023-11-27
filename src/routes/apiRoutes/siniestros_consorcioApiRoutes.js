@@ -13,4 +13,7 @@ router.get('/', siniestros_consorcioApiController.list);
 //guardar en base de datos nuevo siniestro_hogar
 router.post('/crear', upload.fields([{name: 'denuncia_mobiliario'}]), validationImage, [validationsHogar], siniestros_consorcioApiController.create)
 
+//buscar un siniestro_consorcio por id
+router.post('/id', siniestros_consorcioApiController.findId)
+
 module.exports = router;

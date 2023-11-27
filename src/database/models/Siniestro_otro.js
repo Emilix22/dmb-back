@@ -46,6 +46,12 @@ module.exports = (sequelize, dataTypes) => {
         },
         denuncia_policial: {
             type: dataTypes.STRING
+        },
+        estado: {
+            type: dataTypes.STRING
+        },
+        observaciones: {
+            type: dataTypes.STRING
         },    
         createdAt: {
             type: dataTypes.DATE

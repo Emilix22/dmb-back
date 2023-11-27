@@ -62,4 +62,7 @@ router.post('/recuperar/:id/', clientesApiController.restore);
 //Recuperar cliente_empresa eliminado
 router.post('/empresa_recuperar/:id/', clientesApiController.restoreEmpresa);
 
+//buscar producto Ecommerce y Sistema
+// router.post('/search', productsApiController.search);
+
 module.exports = router;

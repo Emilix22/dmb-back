@@ -131,6 +131,12 @@ module.exports = (sequelize, dataTypes) => {
         vehiculos_terceros_inv: {
             type: dataTypes.STRING
         },
+        estado: {
+            type: dataTypes.STRING
+        },
+        observaciones: {
+            type: dataTypes.STRING
+        },
         createdAt: {
             type: dataTypes.DATE
         },

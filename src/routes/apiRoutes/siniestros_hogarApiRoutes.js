@@ -13,4 +13,7 @@ router.get('/', siniestros_hogarApiController.list);
 //guardar en base de datos nuevo siniestro_hogar
 router.post('/crear', upload.fields([{name: 'denuncia_mobiliario'}, {name: 'denuncia_notebook'}, {name: 'denuncia_electro'}, {name: 'denuncia_bicicleta'}]), validationImage, [validationsHogar], siniestros_hogarApiController.create)
 
+//buscar un siniestro_hogar por id
+router.post('/id', siniestros_hogarApiController.findId)
+
 module.exports = router;

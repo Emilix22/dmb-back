@@ -13,4 +13,7 @@ router.get('/', siniestros_otroApiController.list);
 //guardar en base de datos nuevo siniestro_otro
 router.post('/crear', upload.fields([{name: 'denuncia_policial'}]), validationImage, [validationsOtro], siniestros_otroApiController.create)
 
+//buscar un siniestro_otro por id
+router.post('/id', siniestros_otroApiController.findId)
+
 module.exports = router;

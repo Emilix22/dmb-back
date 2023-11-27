@@ -77,6 +77,12 @@ module.exports = (sequelize, dataTypes) => {
         bienes_afectados: {
             type: dataTypes.STRING
         },
+        estado: {
+            type: dataTypes.STRING
+        },
+        observaciones: {
+            type: dataTypes.STRING
+        },
         createdAt: {
             type: dataTypes.DATE
         },
