@@ -170,6 +170,7 @@ const controller = {
                 rueda_tras_izquierda: req.body.rueda_tras_izquierda,
                 img_rueda: imgRueda,
                 vehiculos_terceros_inv: req.body.vehiculos_terceros_inv,
+                estado: "DENUNCIADO"
                 //vti_aseguradora: req.body.oc_insurance//poner req.body.oc_insurance[0]+", "+req.body.oc_insurance[1]etc..
                 // vti_nombre: req.body.oc_name,
                 // vti_apellido: req.body.oc_surname,
@@ -254,7 +255,24 @@ const controller = {
             }    
         })
         .catch(error => {console.log(error)});
-    }
+    },
+
+    update: (req, res) => {
+        
+        Siniestros.update(
+            {
+                estado: req.body.estado,
+                observaciones: req.body.observaciones,
+            },
+            {
+                where: {id_siniestro: req.body.id},
+            }
+        )
+        .then(resultado => {
+            this.findId()
+        })
+        .catch(error => {console.log(error)});
+    },
 
 };
 

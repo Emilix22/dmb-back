@@ -13,7 +13,10 @@ router.get('/', siniestros_autoApiController.list);
 router.post('/crear', upload.fields([{name: 'license_front'}, {name: 'license_back'}, {name: 'police_complaint'}, {name: 'img_rueda'}]), validationImage, [validationsAuto], siniestros_autoApiController.create);
 
 //buscar un siniestro_auto por id
-router.post('/id', siniestros_autoApiController.findId)
+router.post('/id', siniestros_autoApiController.findId);
+
+//editar siniestro_auto
+router.put('/editar', siniestros_autoApiController.update);
 
 
 module.exports = router;
