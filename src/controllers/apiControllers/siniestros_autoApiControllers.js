@@ -269,7 +269,13 @@ const controller = {
             }
         )
         .then(resultado => {
-            this.findId()
+            let info = {
+                meta: {
+                    status : 200,
+                    url: '/api/siniestros_auto/editar'
+                } 
+            };
+            return res.status(200).json(info);
         })
         .catch(error => {console.log(error)});
     },
