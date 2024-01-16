@@ -3,12 +3,12 @@ require('dotenv').config();
 
 
 const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
+    host: "c1590039.ferozo.com",
     port: 587,
     secure: false, // upgrade later with STARTTLS
     auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASSWORD,
+      user: "siniestros@dmbconsultores.com.ar",
+      pass: "Europa16",
     },
   });
 
