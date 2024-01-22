@@ -133,47 +133,47 @@ const controller = {
             })
             .then(siniestro_moto => {
                 //enviar email
-                transporter.sendMail({
-                    from: 'DMB Consultores siniestros@dmbconsultores.com.ar',
-                    to: [cliente.email, 'siniestros@dmbconsultores.com.ar'],
-                    subject: 'Confirmación Denuncia de siniestro',
-                    html: `<!DOCTYPE html>
-                            <html>
-                                <head>
+                // transporter.sendMail({
+                //     from: 'DMB Consultores siniestros@dmbconsultores.com.ar',
+                //     to: [cliente.email, 'siniestros@dmbconsultores.com.ar'],
+                //     subject: 'Confirmación Denuncia de siniestro',
+                //     html: `<!DOCTYPE html>
+                //             <html>
+                //                 <head>
                                     
-                                </head>
-                                <body>
-                                    <p>Hola ${cliente.nombre ? cliente.nombre+" DNI: "+cliente.dni : cliente.nombre_empresa+" CUIT: "+cliente.cuit}, este es un resumen de la denuncia "Siniestro Auto" realizada en nuestro sitio web.</p>
-                                    <div>
-                                        <label>Fecha del Siniestro: </label>
-                                        <span>${req.body.date}</span>
-                                    </div>
-                                    <div>
-                                        <label>Hora del Siniestro: </label>
-                                        <span>${req.body.hour}</span>
-                                    </div>
-                                    <div>
-                                        <label>Lugar del Siniestro: </label>
-                                        <span>${req.body.street+" "+req.body.door+" "+req.body.city}</span>
-                                    </div>
-                                    <div>
-                                        <label>Motivo: </label>
-                                        <span>${req.body.raison}</span>
-                                    </div>
-                                    <div>
-                                        <label>Consecuencia: </label>
-                                        <span>${req.body.consequence}</span>
-                                    </div>
-                                    <div>
-                                        <label>Descripción de los hechos: </label>
-                                        <p>${req.body.description}</p>
-                                    </div>
-                                </body>
-                                <footer>
+                //                 </head>
+                //                 <body>
+                //                     <p>Hola ${cliente.nombre ? cliente.nombre+" DNI: "+cliente.dni : cliente.nombre_empresa+" CUIT: "+cliente.cuit}, este es un resumen de la denuncia "Siniestro Auto" realizada en nuestro sitio web.</p>
+                //                     <div>
+                //                         <label>Fecha del Siniestro: </label>
+                //                         <span>${req.body.date}</span>
+                //                     </div>
+                //                     <div>
+                //                         <label>Hora del Siniestro: </label>
+                //                         <span>${req.body.hour}</span>
+                //                     </div>
+                //                     <div>
+                //                         <label>Lugar del Siniestro: </label>
+                //                         <span>${req.body.street+" "+req.body.door+" "+req.body.city}</span>
+                //                     </div>
+                //                     <div>
+                //                         <label>Motivo: </label>
+                //                         <span>${req.body.raison}</span>
+                //                     </div>
+                //                     <div>
+                //                         <label>Consecuencia: </label>
+                //                         <span>${req.body.consequence}</span>
+                //                     </div>
+                //                     <div>
+                //                         <label>Descripción de los hechos: </label>
+                //                         <p>${req.body.description}</p>
+                //                     </div>
+                //                 </body>
+                //                 <footer>
                                     
-                                </footer>
-                            </html>`,
-                });
+                //                 </footer>
+                //             </html>`,
+                // });
                 
                 // envia respuesta al front
                 let info = {

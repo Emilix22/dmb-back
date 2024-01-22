@@ -59,16 +59,16 @@ app.use('/api/metodosPago', metodosPagoApiRoutes);
 app.use('/api/reportes', reportesApiRoutes);
 
 /**************************servidor para https****************** */
-const port = process.env.PORT || 3000;
-https.createServer({
-    cert: fs.readFileSync('fullchain.pem'),
-    key: fs.readFileSync('privkey.pem')
-}, app).listen(port, () => {
-    console.log('Servidor corriendo en puerto', port);
-});
-/***************************************************************** */
-
 // const port = process.env.PORT || 3000;
-// app.listen(port, () => {
+// https.createServer({
+//     cert: fs.readFileSync('fullchain.pem'),
+//     key: fs.readFileSync('privkey.pem')
+// }, app).listen(port, () => {
 //     console.log('Servidor corriendo en puerto', port);
 // });
+/***************************************************************** */
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log('Servidor corriendo en puerto', port);
+});
