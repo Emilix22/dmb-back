@@ -20,7 +20,7 @@ const metodosPagoApiRoutes = require('./src/routes/apiRoutes/metodosPagoApiRoute
 const reportesApiRoutes = require('./src/routes/apiRoutes/reportesApiRoutes');
 
 /****************************************** Configuración CORS ***************************************/
-const listaBlanca = ['http://localhost:5173/', 'https://dmb-clientes.onrender.com/', 'https://emilixweb.com/'];
+const listaBlanca = ['http://localhost:5173/', 'https://emilixweb.com/'];
 const corsOptions = {
     origin: (origin, callback) => {
         if (listaBlanca.indexOf(origin != -1)) {
