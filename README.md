@@ -114,4 +114,4 @@ Puedes abrir un [issue](https://github.com/Emilix22/dmb-back/issues) o contactar
 
 ---
 
-> Made with 💼 by profesionales del backend.
+> Made with 💼 & ❤️ by (https://emilixweb.com/).
